@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "pockai",
+    "slug": "pockai",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000010"
+    }
+  }
+}
