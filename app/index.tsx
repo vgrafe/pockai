@@ -119,13 +119,13 @@ const Recorder = () => {
   return (
     <YStack
       flex={1}
-      py={80}
-      px={40}
+      py="$8"
+      px="$4"
       alignItems="center"
       justifyContent="space-around"
     >
       <ScrollView>
-        <Text fontSize={24} textAlign="center">
+        <Text fontSize="$8" textAlign="center">
           {lastLine || "press the button, speak, then release"}
         </Text>
       </ScrollView>
@@ -133,7 +133,7 @@ const Recorder = () => {
         alignSelf="center"
         backgroundColor={recording ? "rgba(255,0,0,0.5)" : "rgba(255,0,0,0.25)"}
         size="$12"
-        borderRadius={100}
+        borderRadius="100%"
         onTouchStart={() => {
           if (status === "ready") startRecording();
         }}

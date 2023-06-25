@@ -43,13 +43,13 @@ export default function Layout() {
               <Theme name={colorScheme === "dark" ? "dark" : "light"}>
                 <YStack h="100%">
                   <XStack
-                    p={24}
-                    pt={56}
+                    p="$3"
+                    pt="$8"
                     alignItems="center"
                     justifyContent="center"
                     backgroundColor={colorScheme === "dark" ? "#110" : "#aaa"}
                   >
-                    <Text fontSize={24}>Pockai</Text>
+                    <Text fontSize="$8">Pockai</Text>
                   </XStack>
                   <Tabs initialRouteName="index">
                     <Tabs.Screen

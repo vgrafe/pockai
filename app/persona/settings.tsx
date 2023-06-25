@@ -5,14 +5,14 @@ const PersonaSettings = () => {
   const { persona } = useAsyncStore();
 
   return (
-    <ScrollView h="100%">
-      <YStack p={12}>
-        <Text fontSize={18}>
+    <ScrollView>
+      <YStack p="$4">
+        <Text fontSize="$7">
           The following is the system prompt for Pockai. It provides initial
           instructions to the underlying language model, helping it understand
           the context of your conversation.
         </Text>
-        <Text fontSize={16} opacity={0.75}>
+        <Text fontSize="$1" opacity={0.75}>
           {persona}
         </Text>
       </YStack>
