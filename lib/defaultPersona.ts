@@ -34,7 +34,10 @@ export const defaultPersona = {
 
 export const systemPrompt = `
 ${personality}
+
 ${location}
+
 ${conversationStyle}
+
 ${resiliency}
 `;
