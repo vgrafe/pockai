@@ -1,7 +1,7 @@
 import { ScrollView, Text, YStack } from "tamagui";
 import { useAsyncStore } from "../../lib/store";
 
-const Settings = () => {
+const PersonaSettings = () => {
   const { persona } = useAsyncStore();
 
   return (
@@ -20,4 +20,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default PersonaSettings;
