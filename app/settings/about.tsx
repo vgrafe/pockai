@@ -3,7 +3,9 @@ import { Text } from "tamagui";
 
 const About = () => (
   <Stack p="$4">
-    <Text>About</Text>
+    <Text>
+      Thanks for giving a try to Pockai! Please submit any feedback to{" "}
+    </Text>
   </Stack>
 );
 
