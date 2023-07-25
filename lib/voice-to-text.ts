@@ -5,7 +5,6 @@ export const callWhisperWithAudioUrl = async (
   const body = new FormData();
   //@ts-expect-error
   body.append("file", {
-    // @ts-ignore
     uri,
     name: "something.m4a",
     type: `audio/m4a`,
@@ -34,7 +33,7 @@ export const callWhisperWithAudioUrl = async (
     }
   );
 
-  const data = await response.json();
+  if (response.ok) return await response.json();
 
-  return data.text;
+  throw await response.json();
 };

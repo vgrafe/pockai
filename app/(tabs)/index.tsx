@@ -65,7 +65,14 @@ const Recorder = () => {
         return;
       }
 
-      const transcription = await callWhisperWithAudioUrl(uri, openAi);
+      let transcription: string;
+      try {
+        transcription = (await callWhisperWithAudioUrl(uri, openAi)).text;
+      } catch (e) {
+        console.log(e);
+        setStatus("ready");
+        return;
+      }
 
       const newChatLine = {
         role: "user",
@@ -150,7 +157,7 @@ const Recorder = () => {
           justifyContent: "center",
           alignItems: "center",
         }}
-        disabled={status !== "ready" || !openAi}
+        // disabled={status !== "ready" || !openAi}
         onPressIn={() => {
           if (status === "ready") startRecording();
         }}
