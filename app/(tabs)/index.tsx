@@ -1,4 +1,4 @@
-import { ScrollView, View, TouchableOpacity } from "react-native";
+import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import { callWhisperWithAudioUrl } from "@/lib/voice-to-text";
 import { callChatGPTWithConvo } from "@/lib/completion";
@@ -17,7 +17,6 @@ import { systemPrompt } from "@/lib/defaultPersona";
 //   withSpring,
 // } from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MonoText } from "@/components/StyledText";
 import { useApiTokens } from "@/lib/secureStore";
 // import { set } from "react-native-reanimated";
 // import { Airplay } from "@tamagui/lucide-icons";
@@ -61,7 +60,7 @@ const Recorder = () => {
       setStatus("thinking");
       const uri = recording.getURI();
 
-      if (!uri) {
+      if (!uri || !openAi) {
         setStatus("ready");
         return;
       }
@@ -131,14 +130,14 @@ const Recorder = () => {
       }}
     >
       <ScrollView>
-        <MonoText
+        <Text
           style={{
             fontSize: 18,
             textAlign: "center",
           }}
         >
           {lastLine || "press the button, speak, then release"}
-        </MonoText>
+        </Text>
       </ScrollView>
       <TouchableOpacity
         style={{
@@ -168,9 +167,9 @@ const Recorder = () => {
           }}
         />
       </TouchableOpacity>
-      <MonoText style={{ marginVertical: 8 }}>
+      <Text style={{ marginVertical: 8 }}>
         {openAi ? status : "please set your api keys in settings"}
-      </MonoText>
+      </Text>
     </View>
   );
 };

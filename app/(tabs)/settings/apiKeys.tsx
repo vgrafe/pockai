@@ -1,20 +1,19 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useApiTokens } from "@/lib/secureStore";
-import { MonoText } from "@/components/StyledText";
-import { TextInput } from "@/components/Themed";
+import { TextInput, Text } from "@/components/Themed";
 
 const ApiKeys = () => {
   const { openAi, elevenLabs, setElevenLabs, setOpenAi } = useApiTokens();
 
   return (
     <View style={styles.container}>
-      <MonoText style={styles.text}>
+      <Text style={styles.text}>
         Pockai needs two api keys to function. Those will be kept in your device
         secured storage and never uploaded.
-      </MonoText>
+      </Text>
       <View style={styles.inputContainer}>
-        <MonoText style={styles.label}>OpenAI (chat, required)</MonoText>
+        <Text style={styles.label}>OpenAI (chat, required)</Text>
         <TextInput
           style={styles.input}
           value={openAi?.toString()}
@@ -22,9 +21,9 @@ const ApiKeys = () => {
         />
       </View>
       <View style={styles.inputContainer}>
-        <MonoText style={styles.label}>
+        <Text style={styles.label}>
           Elevenlabs (speech synthesis, optional)
-        </MonoText>
+        </Text>
         <TextInput
           style={styles.input}
           value={elevenLabs?.toString()}

@@ -1,14 +1,13 @@
 import { Link } from "expo-router";
-import { View } from "react-native";
-import { MonoText } from "@/components/StyledText";
+import { View, Text } from "@/components/Themed";
 
 const Settings = () => (
   <View>
     <Link href="/settings/apiKeys">
-      <MonoText style={{ fontSize: 32 }}>API keys</MonoText>
+      <Text style={{ fontSize: 32 }}>API keys</Text>
     </Link>
     <Link href="/settings/about">
-      <MonoText style={{ fontSize: 32 }}>About</MonoText>
+      <Text style={{ fontSize: 32 }}>About</Text>
     </Link>
   </View>
 );

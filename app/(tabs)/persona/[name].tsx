@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
 import { TextInput, StyleSheet, View, ActivityIndicator } from "react-native";
 import { useElevenLabsVoices } from "@/lib/queries";
-import { MonoText } from "@/components/StyledText";
+import { Text } from "@/components/Themed";
 
 const Persona = () => {
   const { name } = useLocalSearchParams();
@@ -11,7 +11,7 @@ const Persona = () => {
 
   return (
     <View style={styles.container}>
-      <MonoText style={styles.text}>{name}</MonoText>
+      <Text style={styles.text}>{name}</Text>
       <TextInput
         style={styles.input}
         value={name.toString()}
@@ -19,10 +19,10 @@ const Persona = () => {
       />
       {voices.voices.map((voice: { name: string }) => (
         <View key={voice.name} style={styles.listItem}>
-          <MonoText>{voice.name}</MonoText>
+          <Text>{voice.name}</Text>
         </View>
       ))}
-      <MonoText style={styles.text}>{JSON.stringify(voices, null, 2)}</MonoText>
+      <Text style={styles.text}>{JSON.stringify(voices, null, 2)}</Text>
     </View>
   );
 };
