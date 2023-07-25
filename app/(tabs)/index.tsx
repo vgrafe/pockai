@@ -1,13 +1,13 @@
-import { ScrollView } from "react-native";
+import { ScrollView, View, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
-import { callWhisperWithAudioUrl } from "../../lib/voice-to-text";
-import { callChatGPTWithConvo } from "../../lib/completion";
+import { callWhisperWithAudioUrl } from "@/lib/voice-to-text";
+import { callChatGPTWithConvo } from "@/lib/completion";
 import {
   callElevenLabsWithText,
   sayWithSystemSpeech,
-} from "../../lib/text-to-speech";
-import { playSound, useRecorder } from "../../lib/audio";
-import { systemPrompt } from "../../lib/defaultPersona";
+} from "@/lib/text-to-speech";
+import { playSound, useRecorder } from "@/lib/audio";
+import { systemPrompt } from "@/lib/defaultPersona";
 // import { TapGestureHandler } from "react-native-gesture-handler";
 // import Animated, {
 //   runOnJS,
@@ -17,8 +17,8 @@ import { systemPrompt } from "../../lib/defaultPersona";
 //   withSpring,
 // } from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Button, Text, YStack } from "tamagui";
 import * as SecureStore from "expo-secure-store";
+import { Text } from "@/components/Themed";
 // import { set } from "react-native-reanimated";
 // import { Airplay } from "@tamagui/lucide-icons";
 
@@ -32,7 +32,7 @@ const Recorder = () => {
   useEffect(() => {
     const loadTokenUse = async () => {
       const tokenUse = await AsyncStorage.getItem("tokenUse");
-      setTokensUsed(parseInt(tokenUse) || 0);
+      setTokensUsed(parseInt(tokenUse?.toString() || "0"));
     };
     loadTokenUse();
   }, []);
@@ -61,6 +61,8 @@ const Recorder = () => {
       setStatus("thinking");
       const uri = recording.getURI();
 
+      if (!uri || !openAi) return;
+
       const transcription = await callWhisperWithAudioUrl(uri, openAi);
 
       const newChatLine = {
@@ -84,7 +86,7 @@ const Recorder = () => {
 
       const elevenLabs = await SecureStore.getItemAsync("ELEVENLABS_API_KEY");
 
-      if (elevenLabs.length > 0) {
+      if (elevenLabs && elevenLabs.length > 0) {
         const audioBlob = await callElevenLabsWithText(response, elevenLabs);
         setStatus("speaking");
         await playSound(audioBlob);
@@ -117,31 +119,53 @@ const Recorder = () => {
   const lastLine = chatLines.filter((a) => a.role !== "system").at(-1)?.content;
 
   return (
-    <YStack
-      flex={1}
-      py="$8"
-      px="$4"
-      alignItems="center"
-      justifyContent="space-around"
+    <View
+      style={{
+        flex: 1,
+        margin: 24,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
       <ScrollView>
-        <Text fontSize="$8" textAlign="center">
+        <Text
+          style={{
+            fontSize: 24,
+            textAlign: "center",
+          }}
+        >
           {lastLine || "press the button, speak, then release"}
         </Text>
       </ScrollView>
-      <Button
-        alignSelf="center"
-        backgroundColor={recording ? "rgba(255,0,0,0.5)" : "rgba(255,0,0,0.25)"}
-        size="$12"
-        borderRadius="100%"
-        onTouchStart={() => {
+      <TouchableOpacity
+        style={{
+          width: 100,
+          height: 100,
+          backgroundColor: recording
+            ? "rgba(255,0,0,0.5)"
+            : "rgba(255,0,0,0.25)",
+          borderRadius: 50,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        disabled={status !== "ready"}
+        onPressIn={() => {
           if (status === "ready") startRecording();
         }}
-        onTouchEnd={() => {
+        onPressOut={() => {
           if (status === "ready") stopRecording();
         }}
-      />
-    </YStack>
+      >
+        <View
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: 40,
+            backgroundColor: "white",
+          }}
+        />
+      </TouchableOpacity>
+    </View>
   );
 };
 export default Recorder;

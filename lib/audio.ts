@@ -53,8 +53,10 @@ export const useRecorder = ({
 export const playSound = async (blob: Blob) => {
   const fr = new FileReader();
   fr.onload = async () => {
+    // check if fr.result is ArrayBufferLike
+    if (!(fr.result instanceof ArrayBuffer)) return;
+
     const fileUri = `${FileSystem.documentDirectory}/something.mp3`;
-    //@ts-expect-error
     const binaryData = new Uint8Array(fr.result);
     const base64String = Buffer.from(binaryData).toString("base64");
 
