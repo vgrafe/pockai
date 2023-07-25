@@ -9,7 +9,8 @@ const PersonaSettings = () => {
     <ScrollView>
       <View
         style={{
-          padding: 24,
+          margin: 24,
+          marginTop: 96,
         }}
       >
         <MonoText>

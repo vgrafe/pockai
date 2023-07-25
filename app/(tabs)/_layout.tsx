@@ -18,6 +18,7 @@ export default function TabLayout() {
         options={{
           title: "Tab One",
           tabBarIcon: ({ color }) => <Smile color={color} />,
+          headerShown: false,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -38,6 +39,7 @@ export default function TabLayout() {
         options={{
           title: "persona",
           tabBarIcon: ({ color }) => <User color={color} />,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -45,6 +47,7 @@ export default function TabLayout() {
         options={{
           title: "settings",
           tabBarIcon: ({ color }) => <Settings color={color} />,
+          headerShown: false,
         }}
       />
     </Tabs>

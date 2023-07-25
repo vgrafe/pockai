@@ -1,7 +1,8 @@
 import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useApiTokens } from "@/lib/secureStore";
 import { MonoText } from "@/components/StyledText";
+import { TextInput } from "@/components/Themed";
 
 const ApiKeys = () => {
   const { openAi, elevenLabs, setElevenLabs, setOpenAi } = useApiTokens();
@@ -17,7 +18,7 @@ const ApiKeys = () => {
         <TextInput
           style={styles.input}
           value={openAi?.toString()}
-          onChangeText={(t) => setOpenAi(t)}
+          onChangeText={(t: string) => setOpenAi(t)}
         />
       </View>
       <View style={styles.inputContainer}>
@@ -27,7 +28,7 @@ const ApiKeys = () => {
         <TextInput
           style={styles.input}
           value={elevenLabs?.toString()}
-          onChangeText={(t) => setElevenLabs(t)}
+          onChangeText={(t: string) => setElevenLabs(t)}
         />
       </View>
     </View>

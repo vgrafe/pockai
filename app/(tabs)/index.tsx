@@ -17,7 +17,6 @@ import { systemPrompt } from "@/lib/defaultPersona";
 //   withSpring,
 // } from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Text } from "@/components/Themed";
 import { MonoText } from "@/components/StyledText";
 import { useApiTokens } from "@/lib/secureStore";
 // import { set } from "react-native-reanimated";
@@ -124,20 +123,22 @@ const Recorder = () => {
     <View
       style={{
         flex: 1,
-        margin: 24,
+        marginTop: 96,
+        marginBottom: 24,
+        marginHorizontal: 48,
         justifyContent: "center",
         alignItems: "center",
       }}
     >
       <ScrollView>
-        <Text
+        <MonoText
           style={{
-            fontSize: 24,
+            fontSize: 18,
             textAlign: "center",
           }}
         >
           {lastLine || "press the button, speak, then release"}
-        </Text>
+        </MonoText>
       </ScrollView>
       <TouchableOpacity
         style={{
@@ -150,7 +151,7 @@ const Recorder = () => {
           justifyContent: "center",
           alignItems: "center",
         }}
-        disabled={status !== "ready"}
+        disabled={status !== "ready" || !openAi}
         onPressIn={() => {
           if (status === "ready") startRecording();
         }}
@@ -167,7 +168,9 @@ const Recorder = () => {
           }}
         />
       </TouchableOpacity>
-      <MonoText>{status}</MonoText>
+      <MonoText style={{ marginVertical: 8 }}>
+        {openAi ? status : "please set your api keys in settings"}
+      </MonoText>
     </View>
   );
 };

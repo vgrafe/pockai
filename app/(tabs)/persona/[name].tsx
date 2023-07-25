@@ -30,7 +30,7 @@ const Persona = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 24,
-    marginVertical: 24,
+    marginVertical: 96,
     marginHorizontal: 16,
     backgroundColor: "#fff",
     borderRadius: 8,
