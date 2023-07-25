@@ -17,8 +17,9 @@ import { systemPrompt } from "@/lib/defaultPersona";
 //   withSpring,
 // } from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as SecureStore from "expo-secure-store";
 import { Text } from "@/components/Themed";
+import { MonoText } from "@/components/StyledText";
+import { useApiTokens } from "@/lib/secureStore";
 // import { set } from "react-native-reanimated";
 // import { Airplay } from "@tamagui/lucide-icons";
 
@@ -28,6 +29,8 @@ import { Text } from "@/components/Themed";
 const Recorder = () => {
   const [minutesUsed, setMinutesUsed] = useState(0);
   const [tokensUsed, setTokensUsed] = useState(0);
+
+  const [openAi, elevenLabs] = useApiTokens((a) => [a.openAi, a.elevenLabs]);
 
   useEffect(() => {
     const loadTokenUse = async () => {
@@ -50,8 +53,6 @@ const Recorder = () => {
 
   const { startRecording, stopRecording, recording } = useRecorder({
     onSoundRecorded: async (recording, minutes) => {
-      const openAi = await SecureStore.getItemAsync("OPENAI_API_KEY");
-
       await AsyncStorage.setItem(
         "minutesUsed",
         (minutesUsed + minutes).toString()
@@ -61,7 +62,10 @@ const Recorder = () => {
       setStatus("thinking");
       const uri = recording.getURI();
 
-      if (!uri || !openAi) return;
+      if (!uri) {
+        setStatus("ready");
+        return;
+      }
 
       const transcription = await callWhisperWithAudioUrl(uri, openAi);
 
@@ -83,8 +87,6 @@ const Recorder = () => {
       // setTotalCost((t) => t + gptCost);
 
       setChatLines((c) => [...c, { role: "assistant", content: response }]);
-
-      const elevenLabs = await SecureStore.getItemAsync("ELEVENLABS_API_KEY");
 
       if (elevenLabs && elevenLabs.length > 0) {
         const audioBlob = await callElevenLabsWithText(response, elevenLabs);
@@ -165,6 +167,7 @@ const Recorder = () => {
           }}
         />
       </TouchableOpacity>
+      <MonoText>{status}</MonoText>
     </View>
   );
 };

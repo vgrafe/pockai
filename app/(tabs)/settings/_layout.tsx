@@ -1,5 +1,4 @@
 import { Stack } from "expo-router";
-import { Text } from "tamagui";
 
 export default function Settings() {
   return (
