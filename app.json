@@ -35,6 +35,15 @@
     "experiments": {
       "tsconfigPaths": true,
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "5e4543c8-1dd2-4af8-9d95-a45091f6b257"
+      }
+    },
+    "owner": "vgrafe"
   }
 }
