@@ -2,6 +2,7 @@ import * as FileSystem from "expo-file-system";
 import { Audio } from "expo-av";
 import { useRef, useState } from "react";
 import { Buffer } from "buffer";
+import { Platform } from "react-native";
 
 export const useRecorder = ({
   onSoundRecorded,
@@ -51,6 +52,24 @@ export const useRecorder = ({
 };
 
 export const playSound = async (blob: Blob) => {
+  if (Platform.OS === "web") {
+    return playSoundWeb(blob);
+  } else {
+    return playSoundNative(blob);
+  }
+};
+
+const playSoundWeb = async (blob: Blob) => {
+  const arrayBuffer = await blob.arrayBuffer();
+  const audioContext = new window.AudioContext();
+  const source = audioContext.createBufferSource();
+  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+  source.buffer = audioBuffer;
+  source.connect(audioContext.destination);
+  source.start();
+};
+
+const playSoundNative = async (blob: Blob) => {
   const fr = new FileReader();
   fr.onload = async () => {
     if (!(fr.result instanceof ArrayBuffer)) return;
