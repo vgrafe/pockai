@@ -1,7 +1,8 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import { useApiTokens } from "@/lib/secureStore";
 import { TextInput, Text } from "@/components/Themed";
+import { ExternalLink } from "@/components/ExternalLink";
 
 const ApiKeys = () => {
   const { openAi, elevenLabs, setElevenLabs, setOpenAi } = useApiTokens();
@@ -9,11 +10,20 @@ const ApiKeys = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        Pockai needs two api keys to function. Those will be kept in your device
-        secured storage and never uploaded.
+        Pockai needs two api keys to function. Those are saved in your{" "}
+        {Platform.OS === "web"
+          ? "browser's localStorage"
+          : "device secured storage"}{" "}
+        and never uploaded. They are only used in the respective api calls
+        necessary for the experience to work.
       </Text>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>OpenAI (chat, required)</Text>
+        <Text style={styles.label}>
+          OpenAI (chat, required) -{" "}
+          <ExternalLink href="https://platform.openai.com/account/api-keys">
+            link
+          </ExternalLink>
+        </Text>
         <TextInput
           style={styles.input}
           value={openAi?.toString()}
@@ -22,7 +32,10 @@ const ApiKeys = () => {
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>
-          Elevenlabs (speech synthesis, optional)
+          Elevenlabs (speech synthesis, optional) -{" "}
+          <ExternalLink href="https://platform.openai.com/account/api-keys">
+            link
+          </ExternalLink>
         </Text>
         <TextInput
           style={styles.input}
