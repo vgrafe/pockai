@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, TouchableOpacity } from "react-native";
+import { ScrollView, View, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import { callWhisperWithAudioUrl } from "@/lib/voice-to-text";
 import { callChatGPTWithConvo } from "@/lib/completion";
@@ -6,8 +6,9 @@ import {
   callElevenLabsWithText,
   sayWithSystemSpeech,
 } from "@/lib/text-to-speech";
-import { playSound, uriToBlob, useRecorder } from "@/lib/audio";
+import { playSound, useRecorder } from "@/lib/audio";
 import { systemPrompt } from "@/lib/defaultPersona";
+import { Text } from "@/components/Themed";
 // import { TapGestureHandler } from "react-native-gesture-handler";
 // import Animated, {
 //   runOnJS,

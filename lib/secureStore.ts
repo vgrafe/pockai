@@ -2,7 +2,7 @@ import { deleteItemAsync, getItemAsync, setItemAsync } from "expo-secure-store";
 import { create } from "zustand";
 import { combine, createJSONStorage, persist } from "zustand/middleware";
 
-const isWeb = typeof window !== "undefined";
+import { Platform } from "react-native";
 
 export const useApiTokens = create(
   persist(
@@ -16,7 +16,7 @@ export const useApiTokens = create(
     {
       name: "apiTokens",
       storage: createJSONStorage(() =>
-        isWeb
+        Platform.OS === "web"
           ? localStorage
           : {
               setItem: setItemAsync,
