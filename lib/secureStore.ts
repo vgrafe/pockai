@@ -2,8 +2,6 @@ import { deleteItemAsync, getItemAsync, setItemAsync } from "expo-secure-store";
 import { create } from "zustand";
 import { combine, createJSONStorage, persist } from "zustand/middleware";
 
-// uses expo-secure-store when on mobile, or localStorage when on web
-
 const isWeb = typeof window !== "undefined";
 
 export const useApiTokens = create(

@@ -6,7 +6,7 @@ import {
   callElevenLabsWithText,
   sayWithSystemSpeech,
 } from "@/lib/text-to-speech";
-import { playSound, useRecorder } from "@/lib/audio";
+import { playSound, uriToBlob, useRecorder } from "@/lib/audio";
 import { systemPrompt } from "@/lib/defaultPersona";
 // import { TapGestureHandler } from "react-native-gesture-handler";
 // import Animated, {
@@ -27,6 +27,7 @@ import { useApiTokens } from "@/lib/secureStore";
 const Recorder = () => {
   const [minutesUsed, setMinutesUsed] = useState(0);
   const [tokensUsed, setTokensUsed] = useState(0);
+  const [audioBlob, setAudioBlob] = useState<Blob>();
 
   const [openAi, elevenLabs] = useApiTokens((a) => [a.openAi, a.elevenLabs]);
 
@@ -94,9 +95,10 @@ const Recorder = () => {
       setChatLines((c) => [...c, { role: "assistant", content: response }]);
 
       if (elevenLabs && elevenLabs.length > 0) {
-        const audioBlob = await callElevenLabsWithText(response, elevenLabs);
+        const _audioBlob = await callElevenLabsWithText(response, elevenLabs);
+        setAudioBlob(_audioBlob);
         setStatus("speaking");
-        await playSound(audioBlob);
+        await playSound(_audioBlob);
         setStatus("ready");
       } else sayWithSystemSpeech(response);
     },
@@ -141,6 +143,9 @@ const Recorder = () => {
           style={{
             fontSize: 18,
             textAlign: "center",
+          }}
+          onPress={() => {
+            audioBlob && playSound(audioBlob);
           }}
         >
           {lastLine || "press the button, speak, then release"}

@@ -53,7 +53,6 @@ export const useRecorder = ({
 export const playSound = async (blob: Blob) => {
   const fr = new FileReader();
   fr.onload = async () => {
-    // check if fr.result is ArrayBufferLike
     if (!(fr.result instanceof ArrayBuffer)) return;
 
     const fileUri = `${FileSystem.documentDirectory}/something.mp3`;
@@ -70,4 +69,26 @@ export const playSound = async (blob: Blob) => {
   };
 
   fr.readAsArrayBuffer(blob);
+};
+
+export const uriToBlob = async (uri: string) => {
+  const response = await fetch(uri);
+  const blob = await response.blob();
+  return blob;
+};
+
+export const uriToBase64 = async (uri: string) => {
+  const response = await fetch(uri);
+  const blob = await response.blob();
+
+  return new Promise((resolve) => {
+    const fr = new FileReader();
+    fr.onload = () => {
+      if (!(fr.result instanceof ArrayBuffer)) return;
+      const binaryData = new Uint8Array(fr.result);
+      const base64String = Buffer.from(binaryData).toString("base64");
+      resolve(base64String);
+    };
+    fr.readAsArrayBuffer(blob);
+  });
 };
