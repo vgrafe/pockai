@@ -16,7 +16,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Tab One",
+          title: "chat",
           tabBarIcon: ({ color }) => <Smile color={color} />,
           headerShown: false,
           headerRight: () => (
