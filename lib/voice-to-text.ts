@@ -4,12 +4,12 @@ export const callWhisperWithAudioUrl = async (
   uri: string,
   openAiKey: string
 ) => {
-  const audioFileResponse = await fetch(uri);
-  const audioFileBlob = await audioFileResponse.blob();
-
   const body = new FormData();
 
   if (Platform.OS === "web") {
+    const audioFileResponse = await fetch(uri);
+    const audioFileBlob = await audioFileResponse.blob();
+
     body.append(
       "file",
       new File([audioFileBlob], "something.m4a", { type: "audio/m4a" })
