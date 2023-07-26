@@ -163,7 +163,7 @@ const Recorder = () => {
           justifyContent: "center",
           alignItems: "center",
         }}
-        // disabled={status !== "ready" || !openAi}
+        disabled={status !== "ready" || !openAi}
         onPressIn={() => {
           if (status === "ready") startRecording();
         }}
