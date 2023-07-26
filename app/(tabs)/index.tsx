@@ -9,18 +9,8 @@ import {
 import { playSound, useRecorder } from "@/lib/audio";
 import { systemPrompt } from "@/lib/defaultPersona";
 import { Text } from "@/components/Themed";
-// import { TapGestureHandler } from "react-native-gesture-handler";
-// import Animated, {
-//   runOnJS,
-//   useAnimatedGestureHandler,
-//   useAnimatedStyle,
-//   useSharedValue,
-//   withSpring,
-// } from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useApiTokens } from "@/lib/secureStore";
-// import { set } from "react-native-reanimated";
-// import { Airplay } from "@tamagui/lucide-icons";
 
 // const CHATGPT_35_COST_PER_TOKEN = 0.000002;
 // const WHISPER_COST_PER_MINUTE = 0.006;
@@ -105,28 +95,11 @@ const Recorder = () => {
     },
   });
 
-  // const eventHandler = useAnimatedGestureHandler({
-  //   onStart: (event, ctx) => {
-  //     if (status === "ready") {
-  //       pressed.value = true;
-  //       runOnJS(startRecording)();
-  //     }
-  //   },
-  //   onEnd: (event, ctx) => {
-  //     if (status === "ready") {
-  //       pressed.value = false;
-  //       runOnJS(stopRecording)();
-  //     }
-  //   },
-  // });
-  // const uas = useAnimatedStyle(() => {
-  //   return {
-  //     backgroundColor: withSpring(pressed.value ? "#F00F86" : "#001972"),
-  //     transform: [{ scale: withSpring(pressed.value ? 1.2 : 1) }],
-  //   };
-  // });
-
-  const lastLine = chatLines.filter((a) => a.role !== "system").at(-1)?.content;
+  let lastLine = chatLines.filter((a) => a.role !== "system").at(-1)?.content;
+  if (!lastLine) {
+    if (!openAi) lastLine = "please set your api keys in settings";
+    else lastLine = "press the button, speak, then release";
+  }
 
   return (
     <View
@@ -149,7 +122,7 @@ const Recorder = () => {
             audioBlob && playSound(audioBlob);
           }}
         >
-          {lastLine || "press the button, speak, then release"}
+          {lastLine}
         </Text>
       </ScrollView>
       <TouchableOpacity
@@ -180,9 +153,7 @@ const Recorder = () => {
           }}
         />
       </TouchableOpacity>
-      <Text style={{ marginVertical: 8 }}>
-        {openAi ? status : "please set your api keys in settings"}
-      </Text>
+      <Text style={{ marginVertical: 8 }}>{status}</Text>
     </View>
   );
 };

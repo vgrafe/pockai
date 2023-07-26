@@ -10,5 +10,6 @@ export const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     gap: 32,
+    backgroundColor: "transparent",
   },
 });
