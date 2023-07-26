@@ -34,9 +34,7 @@ const ApiKeys = () => {
       <View style={localStyles.inputContainer}>
         <Text style={localStyles.label}>
           Elevenlabs (speech synthesis, optional) -{" "}
-          <ExternalLink href="https://platform.openai.com/account/api-keys">
-            link
-          </ExternalLink>
+          <ExternalLink href="https://elevenlabs.io/">link</ExternalLink>
         </Text>
         <TextInput
           style={localStyles.input}
