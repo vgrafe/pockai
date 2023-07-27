@@ -84,7 +84,6 @@ const Recorder = () => {
       // setTotalCost((t) => t + gptCost);
 
       setChatLines((c) => [...c, { role: "assistant", content: response }]);
-      scrollRef.current?.scrollToEnd({ animated: true });
 
       if (elevenLabs && elevenLabs.length > 0) {
         const _audioBlob = await callElevenLabsWithText(response, elevenLabs);
@@ -121,7 +120,10 @@ const Recorder = () => {
         alignItems: "center",
       }}
     >
-      <ScrollView ref={scrollRef} style={{ display: "flex", width: "100%" }}>
+      <ScrollView
+        ref={scrollRef}
+        style={{ display: "flex", width: "100%", maxWidth: 500 }}
+      >
         {actualChatLines.map((line, i) => (
           <Text
             key={i}
