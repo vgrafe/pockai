@@ -1,4 +1,4 @@
-import { ScrollView, View, TouchableOpacity } from "react-native";
+import { ScrollView, View, TouchableOpacity, StyleSheet } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { callWhisperWithAudioUrl } from "@/lib/voice-to-text";
 import { callChatGPTWithConvo } from "@/lib/completion";
@@ -107,7 +107,7 @@ const Recorder = () => {
 
   useEffect(() => {
     scrollRef.current?.scrollToEnd({ animated: true });
-  }, [lastLine]);
+  }, [actualChatLines.length]);
 
   return (
     <View
@@ -125,26 +125,42 @@ const Recorder = () => {
         style={{ display: "flex", width: "100%", maxWidth: 500 }}
       >
         {actualChatLines.map((line, i) => (
-          <Text
+          <View
             key={i}
-            onPress={() => {
-              if (audioBlob && i == actualChatLines.length - 1)
-                playSound(audioBlob);
-            }}
-            style={{
-              fontSize: 18,
-              paddingVertical: 4,
-              paddingHorizontal: 6,
-              borderRadius: 6,
-              maxWidth: "95%",
-              marginVertical: 4,
-              alignSelf: line.role === "user" ? "flex-end" : "flex-start",
-              backgroundColor: line.role === "user" ? "#22c" : "#777",
-            }}
+            style={[
+              styles.chatBubble,
+              {
+                alignSelf: line.role === "user" ? "flex-end" : "flex-start",
+                backgroundColor: line.role === "user" ? "#22c" : "#777",
+              },
+            ]}
           >
-            {line.content}
-          </Text>
+            <Text
+              style={{
+                fontSize: 18,
+              }}
+              onPress={() => {
+                if (audioBlob && i == actualChatLines.length - 1)
+                  playSound(audioBlob);
+              }}
+            >
+              {line.content}
+            </Text>
+          </View>
         ))}
+        {status === "thinking" && (
+          <View
+            style={[
+              styles.chatBubble,
+              {
+                alignSelf: "flex-start",
+                backgroundColor: "#777",
+              },
+            ]}
+          >
+            <Text style={{ fontSize: 18 }}>...</Text>
+          </View>
+        )}
       </ScrollView>
       <TouchableOpacity
         style={{
@@ -174,8 +190,18 @@ const Recorder = () => {
           }}
         />
       </TouchableOpacity>
-      <Text style={{ marginVertical: 8 }}>{status}</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  chatBubble: {
+    paddingVertical: 4,
+    paddingHorizontal: 6,
+    borderRadius: 6,
+    maxWidth: "95%",
+    marginVertical: 4,
+  },
+});
+
 export default Recorder;
