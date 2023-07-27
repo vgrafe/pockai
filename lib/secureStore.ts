@@ -4,6 +4,15 @@ import { combine, createJSONStorage, persist } from "zustand/middleware";
 
 import { Platform } from "react-native";
 
+export const SecureStoreAdapter =
+  Platform.OS === "web"
+    ? localStorage
+    : {
+        setItem: setItemAsync,
+        getItem: getItemAsync,
+        removeItem: deleteItemAsync,
+      };
+
 export const useApiTokens = create(
   persist(
     combine(
@@ -15,15 +24,7 @@ export const useApiTokens = create(
     ),
     {
       name: "apiTokens",
-      storage: createJSONStorage(() =>
-        Platform.OS === "web"
-          ? localStorage
-          : {
-              setItem: setItemAsync,
-              getItem: getItemAsync,
-              removeItem: deleteItemAsync,
-            }
-      ),
+      storage: createJSONStorage(() => SecureStoreAdapter),
     }
   )
 );

@@ -1,4 +1,4 @@
-import { ScrollView, View, TouchableOpacity } from "react-native";
+import { ScrollView, View, TouchableOpacity, Button } from "react-native";
 import { useEffect, useState } from "react";
 import { callWhisperWithAudioUrl } from "@/lib/voice-to-text";
 import { callChatGPTWithConvo } from "@/lib/completion";
@@ -12,8 +12,11 @@ import { Text } from "@/components/Themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useApiTokens } from "@/lib/secureStore";
 
+import { Session } from "@supabase/supabase-js";
 // const CHATGPT_35_COST_PER_TOKEN = 0.000002;
 // const WHISPER_COST_PER_MINUTE = 0.006;
+import { supabase } from "@/lib/supabase";
+import Auth from "@/components/Auth";
 
 const Recorder = () => {
   const [minutesUsed, setMinutesUsed] = useState(0);
@@ -21,6 +24,18 @@ const Recorder = () => {
   const [audioBlob, setAudioBlob] = useState<Blob>();
 
   const [openAi, elevenLabs] = useApiTokens((a) => [a.openAi, a.elevenLabs]);
+
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
 
   useEffect(() => {
     const loadTokenUse = async () => {
@@ -154,7 +169,16 @@ const Recorder = () => {
         />
       </TouchableOpacity>
       <Text style={{ marginVertical: 8 }}>{status}</Text>
+      {session && session.user ? (
+        <>
+          <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
+          <Text>logged as {session.user.email}!</Text>
+        </>
+      ) : (
+        <Auth />
+      )}
     </View>
   );
 };
+
 export default Recorder;
