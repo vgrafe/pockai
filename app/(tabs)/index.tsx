@@ -128,7 +128,8 @@ const Recorder = () => {
           <Text
             key={i}
             onPress={() => {
-              audioBlob && playSound(audioBlob);
+              if (audioBlob && i == actualChatLines.length - 1)
+                playSound(audioBlob);
             }}
             style={{
               fontSize: 18,
