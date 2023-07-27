@@ -63,3 +63,44 @@ export function View(props: ViewProps) {
 
   return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 }
+
+export function Bubble(
+  props: ViewProps & {
+    backgroundColor: "blue" | "gray";
+    alignSelf: "flex-end" | "flex-start";
+  }
+) {
+  const {
+    style,
+    lightColor,
+    darkColor,
+    alignSelf,
+    backgroundColor,
+    ...otherProps
+  } = props;
+
+  const theme = useColorScheme() ?? "light";
+
+  const colors = {
+    light: { blue: "#99f", gray: "#bbb" },
+    dark: { blue: "#0A84FF", gray: "#333" },
+  };
+
+  return (
+    <DefaultView
+      style={[
+        {
+          alignSelf,
+          paddingVertical: 4,
+          paddingHorizontal: 6,
+          borderRadius: 6,
+          maxWidth: "95%",
+          marginVertical: 4,
+          backgroundColor: colors[theme][backgroundColor],
+        },
+        style,
+      ]}
+      {...otherProps}
+    />
+  );
+}

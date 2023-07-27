@@ -8,7 +8,7 @@ import {
 } from "@/lib/text-to-speech";
 import { playSound, useRecorder } from "@/lib/audio";
 import { systemPrompt } from "@/lib/defaultPersona";
-import { Text } from "@/components/Themed";
+import { Bubble, Text } from "@/components/Themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useApiTokens } from "@/lib/secureStore";
 
@@ -125,15 +125,10 @@ const Recorder = () => {
         style={{ display: "flex", width: "100%", maxWidth: 500 }}
       >
         {actualChatLines.map((line, i) => (
-          <View
+          <Bubble
             key={i}
-            style={[
-              styles.chatBubble,
-              {
-                alignSelf: line.role === "user" ? "flex-end" : "flex-start",
-                backgroundColor: line.role === "user" ? "#22c" : "#777",
-              },
-            ]}
+            alignSelf={line.role === "user" ? "flex-end" : "flex-start"}
+            backgroundColor={line.role === "user" ? "blue" : "gray"}
           >
             <Text
               style={{
@@ -146,20 +141,12 @@ const Recorder = () => {
             >
               {line.content}
             </Text>
-          </View>
+          </Bubble>
         ))}
         {status === "thinking" && (
-          <View
-            style={[
-              styles.chatBubble,
-              {
-                alignSelf: "flex-start",
-                backgroundColor: "#777",
-              },
-            ]}
-          >
+          <Bubble alignSelf="flex-start" backgroundColor="gray">
             <Text style={{ fontSize: 18 }}>...</Text>
-          </View>
+          </Bubble>
         )}
       </ScrollView>
       <TouchableOpacity
@@ -193,15 +180,5 @@ const Recorder = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  chatBubble: {
-    paddingVertical: 4,
-    paddingHorizontal: 6,
-    borderRadius: 6,
-    maxWidth: "95%",
-    marginVertical: 4,
-  },
-});
 
 export default Recorder;
