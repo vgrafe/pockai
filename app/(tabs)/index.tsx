@@ -107,7 +107,7 @@ const Recorder = () => {
 
   useEffect(() => {
     scrollRef.current?.scrollToEnd({ animated: true });
-  }, [actualChatLines.length]);
+  }, [actualChatLines.length, lastLine]);
 
   return (
     <View
