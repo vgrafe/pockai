@@ -1,5 +1,5 @@
 import { ScrollView, View, TouchableOpacity } from "react-native";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { callWhisperWithAudioUrl } from "@/lib/voice-to-text";
 import { callChatGPTWithConvo } from "@/lib/completion";
 import {
@@ -84,6 +84,7 @@ const Recorder = () => {
       // setTotalCost((t) => t + gptCost);
 
       setChatLines((c) => [...c, { role: "assistant", content: response }]);
+      scrollRef.current?.scrollToEnd({ animated: true });
 
       if (elevenLabs && elevenLabs.length > 0) {
         const _audioBlob = await callElevenLabsWithText(response, elevenLabs);
@@ -95,11 +96,19 @@ const Recorder = () => {
     },
   });
 
-  let lastLine = chatLines.filter((a) => a.role !== "system").at(-1)?.content;
+  const actualChatLines = chatLines.filter((a) => a.role !== "system");
+
+  let lastLine = actualChatLines.at(-1)?.content;
   if (!lastLine) {
     if (!openAi) lastLine = "please set your api keys in settings";
     else lastLine = "press the button, speak, then release";
   }
+
+  const scrollRef = useRef<ScrollView>(null);
+
+  useEffect(() => {
+    scrollRef.current?.scrollToEnd({ animated: true });
+  }, [lastLine]);
 
   return (
     <View
@@ -107,23 +116,32 @@ const Recorder = () => {
         flex: 1,
         marginTop: 96,
         marginBottom: 24,
-        marginHorizontal: 48,
+        marginHorizontal: 16,
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <ScrollView>
-        <Text
-          style={{
-            fontSize: 18,
-            textAlign: "center",
-          }}
-          onPress={() => {
-            audioBlob && playSound(audioBlob);
-          }}
-        >
-          {lastLine}
-        </Text>
+      <ScrollView ref={scrollRef} style={{ display: "flex", width: "100%" }}>
+        {actualChatLines.map((line, i) => (
+          <Text
+            key={i}
+            onPress={() => {
+              audioBlob && playSound(audioBlob);
+            }}
+            style={{
+              fontSize: 18,
+              paddingVertical: 4,
+              paddingHorizontal: 6,
+              borderRadius: 6,
+              maxWidth: "95%",
+              marginVertical: 4,
+              alignSelf: line.role === "user" ? "flex-end" : "flex-start",
+              backgroundColor: line.role === "user" ? "#22c" : "#777",
+            }}
+          >
+            {line.content}
+          </Text>
+        ))}
       </ScrollView>
       <TouchableOpacity
         style={{
