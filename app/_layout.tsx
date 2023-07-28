@@ -1,4 +1,3 @@
-import { Audio } from "expo-av";
 import {
   DarkTheme,
   DefaultTheme,
@@ -53,18 +52,6 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-
-  useEffect(() => {
-    const askAudio = async () => {
-      await Audio.requestPermissionsAsync();
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
-      });
-    };
-
-    askAudio();
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

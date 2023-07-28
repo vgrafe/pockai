@@ -1,4 +1,5 @@
 import * as Speech from "expo-speech";
+import { useAsyncStore } from "./store";
 
 export const getElevenLabsVoices = async (elevenLabsKey: string) =>
   fetch("https://api.elevenlabs.io/v1/voices", {
@@ -11,9 +12,10 @@ export const getElevenLabsVoices = async (elevenLabsKey: string) =>
 
 export const callElevenLabsWithText = async (
   text: string,
-  elevenLabsKey: string,
-  voiceId: string = "TxGEqnHWrfWFTfGW9XjX"
+  elevenLabsKey: string
 ) => {
+  const voiceId = useAsyncStore.getState().voiceId;
+
   const res = await fetch(
     `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/stream`,
     {
