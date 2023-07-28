@@ -14,7 +14,11 @@ export const callElevenLabsWithText = async (
   text: string,
   elevenLabsKey: string
 ) => {
-  const voiceId = useAsyncStore.getState().voiceId;
+  const voiceId = useAsyncStore.getState().voice?.voice_id;
+
+  if (!voiceId) {
+    throw new Error("No voice selected");
+  }
 
   const res = await fetch(
     `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/stream`,

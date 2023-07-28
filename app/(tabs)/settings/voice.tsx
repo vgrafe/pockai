@@ -1,12 +1,15 @@
 import { View, Text } from "@/components/Themed";
 import { styles } from "@/lib/styles";
 import { useElevenLabsVoices } from "@/lib/queries";
-import { ScrollView } from "react-native";
+import { Button, ScrollView } from "react-native";
 import { useAsyncStore } from "@/lib/store";
 
 const Voice = () => {
   const { data: voices, isLoading } = useElevenLabsVoices();
-  const [voiceId, setVoiceId] = useAsyncStore((a) => [a.voiceId, a.setVoiceId]);
+  const [selectedVoice, setSelectedVoice] = useAsyncStore((a) => [
+    a.voice,
+    a.setVoice,
+  ]);
 
   return (
     <ScrollView>
@@ -15,10 +18,13 @@ const Voice = () => {
           <Text>Loading...</Text>
         ) : (
           voices?.voices.map((voice: { name: string; voice_id: string }) => (
-            <Text key={voice.name} onPress={() => setVoiceId(voice.voice_id)}>
-              {voice.name}
-              {voiceId === voice.voice_id && " ASAASDAOISJDOAISJD"}
-            </Text>
+            <Button
+              key={voice.name}
+              onPress={() => setSelectedVoice(voice)}
+              title={`${voice.name} ${
+                selectedVoice?.voice_id === voice.voice_id ? " SELECTED" : ""
+              }`}
+            />
           ))
         )}
       </View>

@@ -5,10 +5,14 @@ import { systemPrompt } from "./defaultPersona";
 
 export const useAsyncStore = create(
   persist(
-    combine({ persona: systemPrompt, voiceId: "" }, (set) => ({
-      setPersona: (persona: null | string) => set({ persona }),
-      setVoiceId: (voiceId: string) => set({ voiceId: voiceId }),
-    })),
+    combine(
+      { persona: systemPrompt, voice: { name: "n/a", voice_id: "" } },
+      (set) => ({
+        setPersona: (persona: null | string) => set({ persona }),
+        setVoice: (voice: { name: string; voice_id: string }) =>
+          set({ voice: voice }),
+      })
+    ),
     {
       name: "persona",
       storage: createJSONStorage(() => AsyncStorage),
