@@ -16,12 +16,6 @@ export const useRecorder = ({
   const startRecording = async () => {
     timerRef.current = Date.now();
     try {
-      await Audio.requestPermissionsAsync();
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
-      });
-
       console.log("Recording started...");
       setIsRecording(true);
 

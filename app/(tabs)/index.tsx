@@ -108,17 +108,11 @@ const Recorder = () => {
 
   const actualChatLines = chatLines.filter((a) => a.role !== "system");
 
-  let lastLine = actualChatLines.at(-1)?.content;
-  if (!lastLine) {
-    if (!openAi) lastLine = "please set your api keys in settings";
-    else lastLine = "press the button, speak, then release";
-  }
-
   const scrollRef = useRef<ScrollView>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollToEnd({ animated: true });
-  }, [actualChatLines.length, lastLine]);
+  }, [actualChatLines.length, actualChatLines.at(-1)?.content]);
 
   return (
     <SafeAreaView
@@ -136,6 +130,11 @@ const Recorder = () => {
           </Text>
           <Link href="/settings">go to settings</Link>
         </>
+      )}
+      {actualChatLines.length === 0 && (
+        <Text style={{ marginTop: "30%", fontSize: 24, textAlign: "center" }}>
+          press and hold the button, talk to me, then release
+        </Text>
       )}
       <ScrollView
         ref={scrollRef}
