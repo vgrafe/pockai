@@ -31,9 +31,9 @@ const Recorder = () => {
     loadTokenUse();
   }, []);
 
-  const [status, setStatus] = useState<"ready" | "thinking" | "speaking">(
-    "ready"
-  );
+  const [status, setStatus] = useState<
+    "ready" | "understanding" | "answering" | "vocalizing" | "speaking"
+  >("ready");
 
   const [chatLines, setChatLines] = useState<ChatCompletionRequestMessage[]>([
     {
@@ -50,7 +50,7 @@ const Recorder = () => {
       );
       setMinutesUsed((t) => t + minutes);
 
-      setStatus("thinking");
+      setStatus("understanding");
       const uri = recording.getURI();
 
       if (!uri || !openAi) {
@@ -76,6 +76,8 @@ const Recorder = () => {
 
       setChatLines(newChatLines);
 
+      setStatus("answering");
+
       const gptAnswer = await callChatGPTWithConvo(newChatLines, openAi);
       const response = gptAnswer.choices[0].message.content;
 
@@ -87,12 +89,14 @@ const Recorder = () => {
       setChatLines((c) => [...c, { role: "assistant", content: response }]);
 
       if (elevenLabs && elevenLabs.length > 0) {
+        setStatus("vocalizing");
         const _audioBlob = await callElevenLabsWithText(response, elevenLabs);
         setAudioBlob(_audioBlob);
         setStatus("speaking");
         await playSound(_audioBlob);
-        setStatus("ready");
       } else sayWithSystemSpeech(response);
+
+      setStatus("ready");
     },
   });
 
@@ -146,7 +150,7 @@ const Recorder = () => {
             {line.content}
           </Bubble>
         ))}
-        {status === "thinking" && (
+        {status === "answering" && (
           <Bubble alignSelf="flex-start" backgroundColor="gray">
             ...
           </Bubble>

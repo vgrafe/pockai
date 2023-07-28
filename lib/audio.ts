@@ -10,6 +10,7 @@ export const useRecorder = ({
   onSoundRecorded: (audio: Audio.Recording, minutesRecording: number) => void;
 }) => {
   const [recording, setRecording] = useState<Audio.Recording>();
+  const [isRecording, setIsRecording] = useState(false);
   const timerRef = useRef(0);
 
   const startRecording = async () => {
@@ -21,11 +22,14 @@ export const useRecorder = ({
         playsInSilentModeIOS: true,
       });
 
+      console.log("Recording started...");
+      setIsRecording(true);
+
       const { recording } = await Audio.Recording.createAsync(
         Audio.RecordingOptionsPresets.HIGH_QUALITY
       );
+
       setRecording(recording);
-      console.log("Recording started...");
     } catch (err) {
       console.error("Failed to start recording", err);
     }
@@ -36,6 +40,8 @@ export const useRecorder = ({
 
     const msRecording = Date.now() - timerRef.current;
     console.log("Stopping recording.");
+    setIsRecording(false);
+
     setRecording(undefined);
     await recording.stopAndUnloadAsync();
     await Audio.setAudioModeAsync({
@@ -45,6 +51,7 @@ export const useRecorder = ({
   };
 
   return {
+    isRecording,
     recording,
     startRecording,
     stopRecording,
