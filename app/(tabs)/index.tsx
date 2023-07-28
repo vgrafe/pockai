@@ -142,9 +142,16 @@ const Recorder = () => {
             key={i}
             alignSelf={line.role === "user" ? "flex-end" : "flex-start"}
             backgroundColor={line.role === "user" ? "blue" : "gray"}
-            onPress={() => {
-              if (audioBlob && i == actualChatLines.length - 1)
-                playSound(audioBlob);
+            onPress={async () => {
+              if (
+                audioBlob &&
+                i == actualChatLines.length - 1 &&
+                status === "ready"
+              ) {
+                setStatus("speaking");
+                await playSound(audioBlob);
+                setStatus("ready");
+              }
             }}
           >
             {line.content}
@@ -161,8 +168,8 @@ const Recorder = () => {
           width: 100,
           height: 100,
           backgroundColor: recording
-            ? "rgba(255,0,0,0.5)"
-            : "rgba(255,0,0,0.25)",
+            ? "rgba(0,0,200,0.75)"
+            : "rgba(0,0,200,0.5)",
           borderRadius: 50,
           justifyContent: "center",
           alignItems: "center",
@@ -184,6 +191,7 @@ const Recorder = () => {
           }}
         />
       </TouchableOpacity>
+      <Text>{status}</Text>
     </View>
   );
 };

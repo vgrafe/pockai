@@ -67,34 +67,42 @@ export const playSound = async (blob: Blob) => {
 };
 
 const playSoundWeb = async (blob: Blob) => {
-  const arrayBuffer = await blob.arrayBuffer();
-  const audioContext = new window.AudioContext();
-  const source = audioContext.createBufferSource();
-  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-  source.buffer = audioBuffer;
-  source.connect(audioContext.destination);
-  source.start();
+  return new Promise<AudioBufferSourceNode>(async (resolve) => {
+    const arrayBuffer = await blob.arrayBuffer();
+    const audioContext = new window.AudioContext();
+    const source = audioContext.createBufferSource();
+    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    source.buffer = audioBuffer;
+    source.connect(audioContext.destination);
+    source.start();
+    source.onended = () => {
+      resolve(source);
+    };
+  });
 };
 
 const playSoundNative = async (blob: Blob) => {
-  const fr = new FileReader();
-  fr.onload = async () => {
-    if (!(fr.result instanceof ArrayBuffer)) return;
+  return new Promise<Audio.Sound>((resolve) => {
+    const fr = new FileReader();
+    fr.onload = async () => {
+      if (!(fr.result instanceof ArrayBuffer)) return;
 
-    const fileUri = `${FileSystem.documentDirectory}/something.mp3`;
-    const binaryData = new Uint8Array(fr.result);
-    const base64String = Buffer.from(binaryData).toString("base64");
+      const fileUri = `${FileSystem.documentDirectory}/something.mp3`;
+      const binaryData = new Uint8Array(fr.result);
+      const base64String = Buffer.from(binaryData).toString("base64");
 
-    await FileSystem.writeAsStringAsync(fileUri, base64String, {
-      encoding: FileSystem.EncodingType.Base64,
-    });
+      await FileSystem.writeAsStringAsync(fileUri, base64String, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
 
-    const { sound } = await Audio.Sound.createAsync({ uri: fileUri });
+      const { sound } = await Audio.Sound.createAsync({ uri: fileUri });
 
-    return sound.playAsync();
-  };
+      await sound.playAsync();
+      resolve(sound);
+    };
 
-  fr.readAsArrayBuffer(blob);
+    fr.readAsArrayBuffer(blob);
+  });
 };
 
 export const uriToBlob = async (uri: string) => {

@@ -86,7 +86,7 @@ export function Bubble(
   const theme = useColorScheme() ?? "light";
 
   const colors = {
-    light: { blue: "#99f", gray: "#bbb" },
+    light: { blue: "#99f", gray: "#ddd" },
     dark: { blue: "#0A84FF", gray: "#333" },
   };
 
