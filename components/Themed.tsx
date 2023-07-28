@@ -41,7 +41,7 @@ export function Text(props: TextProps) {
 
   return (
     <DefaultText
-      style={[{ color }, { fontWeight: "300" }, style]}
+      style={[{ color }, { fontWeight: "300", fontSize: 16 }, style]}
       {...otherProps}
     />
   );
@@ -68,6 +68,8 @@ export function Bubble(
   props: ViewProps & {
     backgroundColor: "blue" | "gray";
     alignSelf: "flex-end" | "flex-start";
+    children: string;
+    onPress?: () => void;
   }
 ) {
   const {
@@ -76,6 +78,8 @@ export function Bubble(
     darkColor,
     alignSelf,
     backgroundColor,
+    children,
+    onPress,
     ...otherProps
   } = props;
 
@@ -101,6 +105,15 @@ export function Bubble(
         style,
       ]}
       {...otherProps}
-    />
+    >
+      <Text
+        style={{
+          fontSize: 18,
+        }}
+        onPress={onPress}
+      >
+        {children}
+      </Text>
+    </DefaultView>
   );
 }

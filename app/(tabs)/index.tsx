@@ -11,6 +11,7 @@ import { systemPrompt } from "@/lib/defaultPersona";
 import { Bubble, Text } from "@/components/Themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useApiTokens } from "@/lib/secureStore";
+import { Link } from "expo-router";
 
 // const CHATGPT_35_COST_PER_TOKEN = 0.000002;
 // const WHISPER_COST_PER_MINUTE = 0.006;
@@ -120,6 +121,14 @@ const Recorder = () => {
         alignItems: "center",
       }}
     >
+      {!openAi && (
+        <>
+          <Text style={{ marginBottom: 16 }}>
+            please set your api keys in settings
+          </Text>
+          <Link href="/settings">go to settings</Link>
+        </>
+      )}
       <ScrollView
         ref={scrollRef}
         style={{ display: "flex", width: "100%", maxWidth: 500 }}
@@ -129,23 +138,17 @@ const Recorder = () => {
             key={i}
             alignSelf={line.role === "user" ? "flex-end" : "flex-start"}
             backgroundColor={line.role === "user" ? "blue" : "gray"}
+            onPress={() => {
+              if (audioBlob && i == actualChatLines.length - 1)
+                playSound(audioBlob);
+            }}
           >
-            <Text
-              style={{
-                fontSize: 18,
-              }}
-              onPress={() => {
-                if (audioBlob && i == actualChatLines.length - 1)
-                  playSound(audioBlob);
-              }}
-            >
-              {line.content}
-            </Text>
+            {line.content}
           </Bubble>
         ))}
         {status === "thinking" && (
           <Bubble alignSelf="flex-start" backgroundColor="gray">
-            <Text style={{ fontSize: 18 }}>...</Text>
+            ...
           </Bubble>
         )}
       </ScrollView>
