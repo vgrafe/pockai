@@ -40,6 +40,7 @@ export default function TabLayout() {
           title: "persona",
           tabBarIcon: ({ color }) => <User color={color} />,
           headerShown: false,
+          tabBarButton: () => null,
         }}
       />
       <Tabs.Screen

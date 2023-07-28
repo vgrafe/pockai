@@ -1,4 +1,10 @@
-import { ScrollView, View, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  ScrollView,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { callWhisperWithAudioUrl } from "@/lib/voice-to-text";
 import { callChatGPTWithConvo } from "@/lib/completion";
@@ -115,12 +121,10 @@ const Recorder = () => {
   }, [actualChatLines.length, lastLine]);
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
-        marginTop: 96,
-        marginBottom: 24,
-        marginHorizontal: 16,
+        margin: "5%",
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -191,8 +195,8 @@ const Recorder = () => {
           }}
         />
       </TouchableOpacity>
-      <Text>{status}</Text>
-    </View>
+      {/* <Text>{status}</Text> */}
+    </SafeAreaView>
   );
 };
 
