@@ -6,7 +6,10 @@ import { systemPrompt } from "./defaultPersona";
 export const useAsyncStore = create(
   persist(
     combine(
-      { persona: systemPrompt, voice: { name: "n/a", voice_id: "" } },
+      {
+        persona: systemPrompt,
+        voice: { name: "n/a", voice_id: "TxGEqnHWrfWFTfGW9XjX" },
+      },
       (set) => ({
         setPersona: (persona: null | string) => set({ persona }),
         setVoice: (voice: { name: string; voice_id: string }) =>
