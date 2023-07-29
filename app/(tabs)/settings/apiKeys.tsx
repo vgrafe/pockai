@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import { useApiTokens } from "@/lib/secureStore";
-import { TextInput } from "@/lib/theme";
+import { TextInput } from "@/components/TextInput";
 import { ExternalLink } from "@/components/ExternalLink";
 import { styles } from "@/lib/styles";
 import { Text } from "@/components/Text";
