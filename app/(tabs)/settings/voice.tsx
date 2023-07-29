@@ -3,6 +3,7 @@ import { styles } from "@/lib/styles";
 import { useElevenLabsVoices } from "@/lib/queries";
 import { Button, ScrollView } from "react-native";
 import { useAsyncStore } from "@/lib/store";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Voice = () => {
   const { data: voices, isLoading } = useElevenLabsVoices();
@@ -18,13 +19,15 @@ const Voice = () => {
           <Text>Loading...</Text>
         ) : (
           voices?.voices.map((voice: { name: string; voice_id: string }) => (
-            <Button
+            <TouchableOpacity
               key={voice.name}
               onPress={() => setSelectedVoice(voice)}
-              title={`${voice.name} ${
-                selectedVoice?.voice_id === voice.voice_id ? " SELECTED" : ""
-              }`}
-            />
+            >
+              <Text>
+                {voice.name}{" "}
+                {selectedVoice?.voice_id === voice.voice_id ? " SELECTED" : ""}
+              </Text>
+            </TouchableOpacity>
           ))
         )}
       </View>
