@@ -11,6 +11,7 @@ import {
 } from "react-native";
 
 import Colors from "@/constants/Colors";
+import { ViewProps } from "./View";
 
 type ThemeProps = {
   lightColor?: string;
@@ -19,25 +20,35 @@ type ThemeProps = {
 
 export type TextProps = ThemeProps & DefaultText["props"];
 export type InputProps = ThemeProps & DefaultTextInput["props"];
-export type ViewProps = ThemeProps & DefaultView["props"];
 
-export function useThemeColor(
-  props: { light?: string; dark?: string },
-  colorName: keyof typeof Colors.light & keyof typeof Colors.dark
-) {
+type ThemeColorParams = {
+  colorName: keyof typeof Colors.light & keyof typeof Colors.dark;
+  overrides: { light?: string; dark?: string };
+};
+
+export function useThemeColor(params: ThemeColorParams[]) {
   const theme = useColorScheme() ?? "light";
-  const colorFromProps = props[theme];
 
-  if (colorFromProps) {
-    return colorFromProps;
-  } else {
-    return Colors[theme][colorName];
+  let result = [];
+
+  for (const param of params) {
+    const colorFromProps = param.overrides[theme];
+
+    if (colorFromProps) {
+      result.push(colorFromProps);
+    } else {
+      result.push(Colors[theme][param.colorName]);
+    }
   }
+
+  return result;
 }
 
 export function Text(props: TextProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+  const [color] = useThemeColor([
+    { colorName: "text", overrides: { light: lightColor, dark: darkColor } },
+  ]);
 
   return (
     <DefaultText
@@ -49,19 +60,27 @@ export function Text(props: TextProps) {
 
 export function TextInput(props: InputProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
 
-  return <DefaultTextInput style={[{ color }, style]} {...otherProps} />;
-}
+  const [color, backgroundColor] = useThemeColor([
+    { colorName: "text", overrides: { light: lightColor, dark: darkColor } },
+    {
+      colorName: "background",
+      overrides: { light: lightColor, dark: darkColor },
+    },
+  ]);
 
-export function View(props: ViewProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
-  const backgroundColor = useThemeColor(
-    { light: lightColor, dark: darkColor },
-    "background"
+  return (
+    <DefaultTextInput
+      style={[
+        {
+          color,
+          backgroundColor,
+        },
+        style,
+      ]}
+      {...otherProps}
+    />
   );
-
-  return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 }
 
 export function Bubble(

@@ -1,5 +1,9 @@
 import { Stack } from "expo-router";
 
+export const unstable_settings = {
+  initialRouteName: "preferences",
+};
+
 export default function Settings() {
   return (
     <Stack initialRouteName="preferences">

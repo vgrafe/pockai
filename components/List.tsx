@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { View, ViewProps } from "./Themed";
+import { View, ViewProps } from "./View";
 
 const Container = (props: ViewProps) => {
   const { style, ...otherProps } = props;

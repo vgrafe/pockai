@@ -1,5 +1,6 @@
 import { ExternalLink } from "@/components/ExternalLink";
-import { View, Text } from "@/components/Themed";
+import { Text } from "@/components/Themed";
+import { View } from "@/components/View";
 import { styles } from "@/lib/styles";
 
 const About = () => (

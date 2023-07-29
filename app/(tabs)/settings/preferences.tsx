@@ -1,7 +1,8 @@
 import { Link } from "expo-router";
-import { View, Text } from "@/components/Themed";
+import { Text } from "@/components/Themed";
 import { styles } from "@/lib/styles";
 import { useApiTokens } from "@/lib/secureStore";
+import { View } from "@/components/View";
 
 const Settings = () => {
   const { elevenLabs } = useApiTokens();
