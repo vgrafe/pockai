@@ -1,11 +1,12 @@
-import { View, ViewProps, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { View, ViewProps } from "./Themed";
 
-export const List = (props: ViewProps) => {
+const Container = (props: ViewProps) => {
   const { style, ...otherProps } = props;
   return <View style={[styles.container, style]} {...otherProps} />;
 };
 
-export const ListItem = (props: ViewProps) => {
+const Item = (props: ViewProps) => {
   const { style, ...otherProps } = props;
   return <View style={[styles.item, style]} {...otherProps} />;
 };
@@ -22,3 +23,8 @@ const styles = StyleSheet.create({
     padding: 12,
   },
 });
+
+export default {
+  Container,
+  Item,
+};

@@ -4,7 +4,7 @@ import { useElevenLabsVoices } from "@/lib/queries";
 import { ScrollView } from "react-native";
 import { useAsyncStore } from "@/lib/store";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { List, ListItem } from "@/components/List";
+import List from "@/components/List";
 
 const Voice = () => {
   const { data: voices, isLoading } = useElevenLabsVoices();
@@ -15,24 +15,24 @@ const Voice = () => {
 
   return (
     <ScrollView>
-      <List style={styles.container}>
+      <List.Container style={styles.container}>
         {isLoading ? (
           <Text>Loading...</Text>
         ) : (
           voices?.voices.map((voice: { name: string; voice_id: string }) => (
-            <ListItem key={voice.name}>
-              <TouchableOpacity onPress={() => setSelectedVoice(voice)}>
+            <TouchableOpacity onPress={() => setSelectedVoice(voice)}>
+              <List.Item key={voice.name}>
                 <Text>
                   {voice.name}{" "}
                   {selectedVoice?.voice_id === voice.voice_id
                     ? " SELECTED"
                     : ""}
                 </Text>
-              </TouchableOpacity>
-            </ListItem>
+              </List.Item>
+            </TouchableOpacity>
           ))
         )}
-      </List>
+      </List.Container>
     </ScrollView>
   );
 };
