@@ -128,7 +128,9 @@ const Recorder = () => {
           <Text style={{ marginBottom: 16 }}>
             please set your api keys in settings
           </Text>
-          <Link href="/settings">go to settings</Link>
+          <Link href="/settings">
+            <Text style={{ marginBottom: 16 }}>go to settings</Text>
+          </Link>
         </>
       )}
       {actualChatLines.length === 0 && (
