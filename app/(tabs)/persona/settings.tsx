@@ -9,12 +9,12 @@ const PersonaSettings = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.text}>
+        <Text>
           The following is the system prompt for Pockai. It provides initial
           instructions to the underlying language model, helping it understand
           the context of your conversation.
         </Text>
-        <Text style={styles.text}>{persona}</Text>
+        <Text>{persona}</Text>
       </View>
     </ScrollView>
   );

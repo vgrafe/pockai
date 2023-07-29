@@ -7,7 +7,14 @@ const Settings = () => {
   const { elevenLabs } = useApiTokens();
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          gap: 32,
+        },
+      ]}
+    >
       <Link href="/settings/apiKeys">
         <Text style={{ fontSize: 32 }}>API keys</Text>
       </Link>

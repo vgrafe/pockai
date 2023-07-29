@@ -9,8 +9,15 @@ const ApiKeys = () => {
   const { openAi, elevenLabs, setElevenLabs, setOpenAi } = useApiTokens();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>
+    <View
+      style={[
+        styles.container,
+        {
+          gap: 32,
+        },
+      ]}
+    >
+      <Text>
         Pockai needs two api keys to function. Those are saved in your{" "}
         {Platform.OS === "web"
           ? "browser's localStorage"
