@@ -1,10 +1,10 @@
-import { Text } from "@/components/Themed";
 import { styles } from "@/lib/styles";
 import { useElevenLabsVoices } from "@/lib/queries";
 import { ScrollView } from "react-native";
 import { useAsyncStore } from "@/lib/store";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import List from "@/components/List";
+import { Text } from "@/components/Text";
 
 const Voice = () => {
   const { data: voices, isLoading } = useElevenLabsVoices();

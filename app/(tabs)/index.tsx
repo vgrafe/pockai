@@ -14,10 +14,11 @@ import {
 } from "@/lib/text-to-speech";
 import { playSound, useRecorder } from "@/lib/audio";
 import { systemPrompt } from "@/lib/defaultPersona";
-import { Bubble, Text } from "@/components/Themed";
+import { Bubble } from "@/components/Themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useApiTokens } from "@/lib/secureStore";
 import { Link } from "expo-router";
+import { Text } from "@/components/Text";
 
 // const CHATGPT_35_COST_PER_TOKEN = 0.000002;
 // const WHISPER_COST_PER_MINUTE = 0.006;

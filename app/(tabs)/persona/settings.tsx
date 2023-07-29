@@ -1,7 +1,7 @@
 import { ScrollView, View } from "react-native";
 import { useAsyncStore } from "@/lib/store";
-import { Text } from "@/components/Themed";
 import { styles } from "@/lib/styles";
+import { Text } from "@/components/Text";
 
 const PersonaSettings = () => {
   const { persona } = useAsyncStore();

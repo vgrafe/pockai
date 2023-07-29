@@ -1,9 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import { useApiTokens } from "@/lib/secureStore";
-import { TextInput, Text } from "@/components/Themed";
+import { TextInput } from "@/components/Themed";
 import { ExternalLink } from "@/components/ExternalLink";
 import { styles } from "@/lib/styles";
+import { Text } from "@/components/Text";
 
 const ApiKeys = () => {
   const { openAi, elevenLabs, setElevenLabs, setOpenAi } = useApiTokens();

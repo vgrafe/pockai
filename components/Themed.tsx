@@ -4,7 +4,6 @@
  */
 
 import {
-  Text as DefaultText,
   useColorScheme,
   View as DefaultView,
   TextInput as DefaultTextInput,
@@ -12,13 +11,13 @@ import {
 
 import Colors from "@/constants/Colors";
 import { ViewProps } from "./View";
+import { Text } from "./Text";
 
-type ThemeProps = {
+export type ThemeProps = {
   lightColor?: string;
   darkColor?: string;
 };
 
-export type TextProps = ThemeProps & DefaultText["props"];
 export type InputProps = ThemeProps & DefaultTextInput["props"];
 
 type ThemeColorParams = {
@@ -42,20 +41,6 @@ export function useThemeColor(params: ThemeColorParams[]) {
   }
 
   return result;
-}
-
-export function Text(props: TextProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
-  const [color] = useThemeColor([
-    { colorName: "text", overrides: { light: lightColor, dark: darkColor } },
-  ]);
-
-  return (
-    <DefaultText
-      style={[{ color }, { fontWeight: "300", fontSize: 16 }, style]}
-      {...otherProps}
-    />
-  );
 }
 
 export function TextInput(props: InputProps) {
