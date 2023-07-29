@@ -4,7 +4,7 @@
  */
 
 import { Text as DefaultText } from "react-native";
-import { ThemeProps, useThemeColor } from "./Themed";
+import { ThemeProps, useThemeColor } from "../lib/theme";
 
 export type TextProps = ThemeProps & DefaultText["props"];
 

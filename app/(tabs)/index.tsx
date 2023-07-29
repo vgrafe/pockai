@@ -1,10 +1,4 @@
-import {
-  ScrollView,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  SafeAreaView,
-} from "react-native";
+import { ScrollView, View, TouchableOpacity, SafeAreaView } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { callWhisperWithAudioUrl } from "@/lib/voice-to-text";
 import { callChatGPTWithConvo } from "@/lib/completion";
@@ -14,7 +8,7 @@ import {
 } from "@/lib/text-to-speech";
 import { playSound, useRecorder } from "@/lib/audio";
 import { systemPrompt } from "@/lib/defaultPersona";
-import { Bubble } from "@/components/Themed";
+import { Bubble } from "@/components/Bubble";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useApiTokens } from "@/lib/secureStore";
 import { Link } from "expo-router";
