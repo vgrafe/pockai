@@ -39,9 +39,15 @@ export const callElevenLabsWithText = async (
     }
   );
 
-  return res.blob();
+  if (res.ok) return res.blob();
+
+  throw new Error("Error while calling ElevenLabs API");
 };
 
 export const sayWithSystemSpeech = (text: string) => {
-  Speech.speak(text);
+  return new Promise((resolve) => {
+    Speech.speak(text, {
+      onDone: () => resolve(true),
+    });
+  });
 };

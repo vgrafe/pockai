@@ -91,11 +91,15 @@ const Recorder = () => {
 
       if (elevenLabs && elevenLabs.length > 0) {
         setStatus("vocalizing");
-        const _audioBlob = await callElevenLabsWithText(response, elevenLabs);
-        setAudioBlob(_audioBlob);
-        setStatus("speaking");
-        await playSound(_audioBlob);
-      } else sayWithSystemSpeech(response);
+        try {
+          const _audioBlob = await callElevenLabsWithText(response, elevenLabs);
+          setAudioBlob(_audioBlob);
+          setStatus("speaking");
+          await playSound(_audioBlob);
+        } catch (e) {
+          await sayWithSystemSpeech(response);
+        }
+      } else await sayWithSystemSpeech(response);
 
       setStatus("ready");
     },
