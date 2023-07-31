@@ -2,7 +2,7 @@ import { Link, Tabs } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
 
 import Colors from "@/constants/Colors";
-import { Info, Settings, Smile, User } from "lucide-react-native";
+import { Info, Settings, MessageSquare, User } from "lucide-react-native";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -17,7 +17,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "chat",
-          tabBarIcon: ({ color }) => <Smile color={color} />,
+          tabBarIcon: ({ color }) => <MessageSquare color={color} />,
           headerShown: false,
           headerRight: () => (
             <Link href="/modal" asChild>
