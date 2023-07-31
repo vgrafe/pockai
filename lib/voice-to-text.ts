@@ -45,7 +45,7 @@ export const callWhisperWithAudioUrl = async (
     }
   );
 
-  if (response.ok) return await response.json();
+  if (response.ok) return response.json();
 
   throw await response.json();
 };

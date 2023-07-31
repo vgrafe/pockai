@@ -19,6 +19,7 @@ import { Text } from "@/components/Text";
 
 const Recorder = () => {
   const [minutesUsed, setMinutesUsed] = useState(0);
+  const [error, setError] = useState<string>();
   const [tokensUsed, setTokensUsed] = useState(0);
   const [audioBlob, setAudioBlob] = useState<Blob>();
 
@@ -96,7 +97,8 @@ const Recorder = () => {
           setAudioBlob(_audioBlob);
           setStatus("speaking");
           await playSound(_audioBlob);
-        } catch (e) {
+        } catch (e: any) {
+          setError(e.message);
           await sayWithSystemSpeech(response);
         }
       } else await sayWithSystemSpeech(response);
@@ -196,6 +198,7 @@ const Recorder = () => {
         />
       </TouchableOpacity>
       {/* <Text>{status}</Text> */}
+      <Text>{error}</Text>
     </SafeAreaView>
   );
 };
