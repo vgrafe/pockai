@@ -3,10 +3,50 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
-import { useColorScheme, View as DefaultView } from "react-native";
+import { useColorScheme, Animated } from "react-native";
 
 import { ViewProps } from "./View";
 import { Text } from "./Text";
+import { useEffect, useRef } from "react";
+
+const ANIMATE = false;
+
+const FadeInView = (
+  props: ViewProps & { direction: "flex-end" | "flex-start" }
+) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: ANIMATE ? 350 : 0,
+      useNativeDriver: true,
+    }).start();
+  }, [fadeAnim]);
+
+  const factor = props.direction === "flex-end" ? 1 : -1;
+
+  return (
+    <Animated.View
+      style={[
+        props.style,
+        {
+          opacity: fadeAnim,
+          transform: [
+            {
+              translateX: fadeAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [factor * 50, 0],
+              }),
+            },
+          ],
+        },
+      ]}
+    >
+      {props.children}
+    </Animated.View>
+  );
+};
 
 export function Bubble(
   props: ViewProps & {
@@ -35,7 +75,8 @@ export function Bubble(
   };
 
   return (
-    <DefaultView
+    <FadeInView
+      direction={alignSelf}
       style={[
         {
           alignSelf,
@@ -58,6 +99,6 @@ export function Bubble(
       >
         {children}
       </Text>
-    </DefaultView>
+    </FadeInView>
   );
 }
