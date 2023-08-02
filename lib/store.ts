@@ -7,6 +7,7 @@ export const useAsyncStore = create(
   persist(
     combine(
       {
+        contacts: [] as Contact[],
         persona: systemPrompt,
         voice: { name: "n/a", voice_id: "TxGEqnHWrfWFTfGW9XjX" },
       },

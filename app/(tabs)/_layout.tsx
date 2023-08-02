@@ -2,7 +2,7 @@ import { Link, Tabs } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
 
 import Colors from "@/constants/Colors";
-import { Info, Settings, MessageSquare, User } from "lucide-react-native";
+import { Info, Settings, MessageSquare } from "lucide-react-native";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -32,15 +32,6 @@ export default function TabLayout() {
               </Pressable>
             </Link>
           ),
-        }}
-      />
-      <Tabs.Screen
-        name="persona"
-        options={{
-          title: "persona",
-          tabBarIcon: ({ color }) => <User color={color} />,
-          headerShown: false,
-          tabBarButton: () => null,
         }}
       />
       <Tabs.Screen
