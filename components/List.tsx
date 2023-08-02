@@ -1,6 +1,5 @@
 import { StyleSheet, TouchableHighlightProps, Pressable } from "react-native";
 import { View, ViewProps } from "./View";
-import { Link, LinkProps, Route } from "expo-router";
 
 const Container = (props: ViewProps) => {
   const { style, ...otherProps } = props;
@@ -24,6 +23,7 @@ const Item = (
 
 const styles = StyleSheet.create({
   container: {
+    margin: 8,
     borderColor: "#8888",
     borderWidth: 1,
     borderRadius: 4,

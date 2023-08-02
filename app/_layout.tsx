@@ -88,6 +88,19 @@ function RootLayoutNav() {
             // @ts-expect-error
             options={({ route }) => ({
               title: route.params.name,
+              headerRight: () => (
+                <Link href={`/contacts/${route.params.name}/settings`} asChild>
+                  <Pressable>
+                    {({ pressed }) => (
+                      <Settings
+                        size={25}
+                        color={Colors[colorScheme ?? "light"].text}
+                        style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                      />
+                    )}
+                  </Pressable>
+                </Link>
+              ),
             })}
           />
           <Stack.Screen name="settings" options={{ presentation: "modal" }} />

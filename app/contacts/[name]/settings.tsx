@@ -1,5 +1,20 @@
+import List from "@/components/List";
 import { Text } from "@/components/Text";
+import { Link, useLocalSearchParams } from "expo-router";
 
 export default function Settings() {
-  return <Text>settings</Text>;
+  const params = useLocalSearchParams();
+
+  return (
+    <List.Container>
+      <List.Item>
+        <Link href={`/contacts/${params.name}/voice`}>
+          <Text>voice</Text>
+        </Link>
+      </List.Item>
+      <List.Item>
+        <Text>prompt</Text>
+      </List.Item>
+    </List.Container>
+  );
 }
