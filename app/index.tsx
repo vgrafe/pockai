@@ -4,31 +4,33 @@ import { View } from "react-native";
 import { useAsyncStore } from "@/lib/asyncStore";
 import { Link } from "expo-router";
 import { styles } from "@/lib/styles";
+import { useEffect } from "react";
+import { systemPrompt } from "@/lib/defaultPersona";
 
 const Contacts = () => {
-  const contacts = useAsyncStore((a) => a.contacts);
+  const [contacts, setContacts] = useAsyncStore((a) => [
+    a.contacts,
+    a.setContacts,
+  ]);
+
+  useEffect(() => {
+    if (contacts.length === 0) {
+      const newContact = {
+        id: "jean",
+        name: "Jean",
+        prompt: systemPrompt,
+        voiceId: "TxGEqnHWrfWFTfGW9XjX",
+      };
+
+      setContacts([newContact]);
+    }
+  }, []);
 
   if (contacts.length === 0) {
     return (
-      <>
-        <View style={styles.centeredContent}>
-          <Text>no contacts</Text>
-        </View>
-        <View style={{ position: "fixed", bottom: 80 }}>
-          <Text>debug</Text>
-
-          <List.Item>
-            <Link href="/contacts/jean/chat">
-              <Text>Jean</Text>
-            </Link>
-          </List.Item>
-          <List.Item>
-            <Link href="/contacts/cule/chat">
-              <Text>Cule</Text>
-            </Link>
-          </List.Item>
-        </View>
-      </>
+      <View style={styles.centeredContent}>
+        <Text>no contacts</Text>
+      </View>
     );
   }
 
