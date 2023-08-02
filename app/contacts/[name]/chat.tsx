@@ -7,12 +7,13 @@ import {
   sayWithSystemSpeech,
 } from "@/lib/text-to-speech";
 import { playSound, useRecorder } from "@/lib/audio";
-import { systemPrompt } from "@/lib/defaultPersona";
 import { Bubble } from "@/components/Bubble";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useApiTokens } from "@/lib/secureStore";
-import { Link } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { Text } from "@/components/Text";
+import { useAsyncStore } from "@/lib/asyncStore";
+import { useCurrentContact } from "@/lib/useCurrentContact";
 
 // const CHATGPT_35_COST_PER_TOKEN = 0.000002;
 // const WHISPER_COST_PER_MINUTE = 0.006;
@@ -22,6 +23,8 @@ const Recorder = () => {
   const [error, setError] = useState<string>();
   const [tokensUsed, setTokensUsed] = useState(0);
   const [audioBlob, setAudioBlob] = useState<Blob>();
+
+  const { currentContact } = useCurrentContact();
 
   const [openAi, elevenLabs] = useApiTokens((a) => [a.openAi, a.elevenLabs]);
 
@@ -40,7 +43,7 @@ const Recorder = () => {
   const [chatLines, setChatLines] = useState<ChatCompletionRequestMessage[]>([
     {
       role: "system",
-      content: systemPrompt,
+      content: currentContact!.prompt,
     },
   ]);
 

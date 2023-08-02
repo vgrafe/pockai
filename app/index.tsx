@@ -16,8 +16,7 @@ const Contacts = () => {
   useEffect(() => {
     if (contacts.length === 0) {
       const newContact = {
-        id: "jean",
-        name: "Jean",
+        name: "jean",
         prompt: systemPrompt,
         voiceId: "TxGEqnHWrfWFTfGW9XjX",
       };
@@ -37,8 +36,8 @@ const Contacts = () => {
   return (
     <View>
       {contacts.map((contact) => (
-        <List.Item key={contact.id}>
-          <Link href={`/contacts/${contact.id}`}>
+        <List.Item key={contact.name}>
+          <Link href={`/contacts/${contact.name}/chat`}>
             <Text>{contact.name}</Text>
           </Link>
         </List.Item>
