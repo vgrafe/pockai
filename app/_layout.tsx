@@ -7,14 +7,12 @@ import { useFonts } from "expo-font";
 import { Link, SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { Platform, Pressable, useColorScheme } from "react-native";
-import { inject } from "@vercel/analytics";
 import Colors from "@/constants/Colors";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Info } from "lucide-react-native";
 
 const queryClient = new QueryClient();
-if (Platform.OS === "web") inject();
 
 export {
   // Catch any errors thrown by the Layout component.
