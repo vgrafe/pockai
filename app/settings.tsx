@@ -1,9 +1,7 @@
-import { Link } from "expo-router";
 import { styles } from "@/lib/styles";
-import { View } from "@/components/View";
+import { View } from "react-native";
 import { Text } from "@/components/Text";
 import { ExternalLink } from "@/components/ExternalLink";
-import List from "@/components/List";
 import ApiKeysMenu from "@/components/ApiKeysMenu";
 
 const Settings = () => {
