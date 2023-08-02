@@ -6,7 +6,7 @@ import { ExternalLink } from "@/components/ExternalLink";
 import { styles } from "@/lib/styles";
 import { Text } from "@/components/Text";
 
-const ApiKeys = () => {
+const ApiKeysMenu = () => {
   const { openAi, elevenLabs, setElevenLabs, setOpenAi } = useApiTokens();
 
   return (
@@ -72,4 +72,4 @@ const localStyles = StyleSheet.create({
   },
 });
 
-export default ApiKeys;
+export default ApiKeysMenu;

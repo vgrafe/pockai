@@ -6,11 +6,11 @@ import {
 import { useFonts } from "expo-font";
 import { Link, SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
-import { Platform, Pressable, useColorScheme } from "react-native";
+import { Pressable, useColorScheme } from "react-native";
 import Colors from "@/constants/Colors";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Settings } from "lucide-react-native";
+import { Settings, Info } from "lucide-react-native";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -92,7 +92,7 @@ function RootLayoutNav() {
                 <Link href={`/contacts/${route.params.name}/settings`} asChild>
                   <Pressable>
                     {({ pressed }) => (
-                      <Settings
+                      <Info
                         size={25}
                         color={Colors[colorScheme ?? "light"].text}
                         style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
