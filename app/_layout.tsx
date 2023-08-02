@@ -4,12 +4,14 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { Link, SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
-import { Platform, useColorScheme } from "react-native";
+import { Platform, Pressable, useColorScheme } from "react-native";
 import { inject } from "@vercel/analytics";
+import Colors from "@/constants/Colors";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Info } from "lucide-react-native";
 
 const queryClient = new QueryClient();
 if (Platform.OS === "web") inject();
@@ -21,7 +23,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "contacts",
+  initialRouteName: "index",
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -57,8 +59,33 @@ function RootLayoutNav() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
-          <Stack.Screen name="contacts" />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="index"
+            options={{
+              headerTitle: "Contacts",
+              headerShown: true,
+              headerRight: () => (
+                <Link href="/modal" asChild>
+                  <Pressable>
+                    {({ pressed }) => (
+                      <Info
+                        size={25}
+                        color={Colors[colorScheme ?? "light"].text}
+                        style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                      />
+                    )}
+                  </Pressable>
+                </Link>
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="contacts/[name]/chat"
+            // @ts-expect-error
+            options={({ route }) => ({
+              title: route.params.name,
+            })}
+          />
           <Stack.Screen name="modal" options={{ presentation: "modal" }} />
         </Stack>
       </ThemeProvider>

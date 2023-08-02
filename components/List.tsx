@@ -1,8 +1,4 @@
-import {
-  StyleSheet,
-  TouchableHighlightProps,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, TouchableHighlightProps, Pressable } from "react-native";
 import { View, ViewProps } from "./View";
 import { Link, LinkProps, Route } from "expo-router";
 
@@ -19,9 +15,9 @@ const Item = (
   const { style, onPress, ...otherProps } = props;
   if (onPress)
     return (
-      <TouchableOpacity onPress={onPress}>
+      <Pressable onPress={onPress}>
         <View style={[styles.item, style]} {...otherProps} />
-      </TouchableOpacity>
+      </Pressable>
     );
   return <View style={[styles.item, style]} {...otherProps} />;
 };

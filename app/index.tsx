@@ -24,12 +24,12 @@ const Contacts = () => {
       )}
       <List.Container>
         <List.Item>
-          <Link href="/contacts/jean">
+          <Link href="/contacts/jean/chat">
             <Text>Jean</Text>
           </Link>
         </List.Item>
         <List.Item>
-          <Link href="/contacts/cule">
+          <Link href="/contacts/cule/chat">
             <Text>Cule</Text>
           </Link>
         </List.Item>
