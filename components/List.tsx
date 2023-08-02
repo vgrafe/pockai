@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableHighlightProps, Pressable } from "react-native";
-import { View, ViewProps } from "./View";
+import { View, ViewProps } from "react-native";
 
 const Container = (props: ViewProps) => {
   const { style, ...otherProps } = props;
