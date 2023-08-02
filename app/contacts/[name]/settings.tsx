@@ -1,12 +1,13 @@
 import List from "@/components/List";
 import { Text } from "@/components/Text";
 import { Link, useLocalSearchParams } from "expo-router";
+import { View } from "react-native";
 
 export default function Settings() {
   const params = useLocalSearchParams();
 
   return (
-    <List.Container>
+    <View>
       <List.Item>
         <Link href={`/contacts/${params.name}/voice`}>
           <Text>voice</Text>
@@ -15,6 +16,6 @@ export default function Settings() {
       <List.Item>
         <Text>prompt</Text>
       </List.Item>
-    </List.Container>
+    </View>
   );
 }

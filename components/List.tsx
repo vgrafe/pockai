@@ -2,11 +2,6 @@ import { ThemeProps, useThemeColor } from "@/lib/theme";
 import { StyleSheet, TouchableHighlightProps, Pressable } from "react-native";
 import { View, ViewProps } from "react-native";
 
-const Container = (props: ViewProps) => {
-  const { style, ...otherProps } = props;
-  return <View style={[styles.container, style]} {...otherProps} />;
-};
-
 const Item = (
   props: ThemeProps &
     ViewProps & {
@@ -37,20 +32,14 @@ const Item = (
 };
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 8,
-    borderColor: "#7777",
-    borderWidth: 1,
-    borderRadius: 4,
-  },
   item: {
     borderColor: "#7777",
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
+    borderTopWidth: 0.5,
     padding: 12,
   },
 });
 
 export default {
-  Container,
   Item,
 };

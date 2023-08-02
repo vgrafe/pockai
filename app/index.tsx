@@ -10,7 +10,7 @@ const Contacts = () => {
   return (
     <View style={{ gap: 12, margin: 12 }}>
       {contacts.length ? (
-        <List.Container>
+        <View>
           {contacts.map((contact) => (
             <List.Item key={contact.id}>
               <Link href={`/contacts/${contact.id}`}>
@@ -18,11 +18,11 @@ const Contacts = () => {
               </Link>
             </List.Item>
           ))}
-        </List.Container>
+        </View>
       ) : (
         <Text>no contacts</Text>
       )}
-      <List.Container>
+      <View>
         <List.Item>
           <Link href="/contacts/jean/chat">
             <Text>Jean</Text>
@@ -33,7 +33,7 @@ const Contacts = () => {
             <Text>Cule</Text>
           </Link>
         </List.Item>
-      </List.Container>
+      </View>
     </View>
   );
 };

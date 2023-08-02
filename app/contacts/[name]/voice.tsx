@@ -1,6 +1,6 @@
 import { styles } from "@/lib/styles";
 import { useElevenLabsVoices } from "@/lib/queries";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { useAsyncStore } from "@/lib/store";
 import List from "@/components/List";
 import { Text } from "@/components/Text";
@@ -19,7 +19,7 @@ const Voice = () => {
       ) : isError ? (
         <Text>Error - check your elevenlabs api key.</Text>
       ) : (
-        <List.Container style={styles.container}>
+        <View style={styles.container}>
           {voices?.voices.map((voice: { name: string; voice_id: string }) => (
             <List.Item key={voice.name} onPress={() => setSelectedVoice(voice)}>
               <Text>
@@ -28,7 +28,7 @@ const Voice = () => {
               </Text>
             </List.Item>
           ))}
-        </List.Container>
+        </View>
       )}
     </ScrollView>
   );
