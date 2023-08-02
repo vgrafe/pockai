@@ -17,6 +17,8 @@ export const useElevenLabsVoices = () => {
       },
     });
 
-    return await req.json();
+    if (req.ok) return await req.json();
+
+    throw new Error("Error while fetching voices");
   });
 };

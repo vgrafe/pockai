@@ -9,9 +9,7 @@ export default function Settings() {
     <Stack initialRouteName="preferences">
       <Stack.Screen
         name="preferences"
-        options={{
-          title: "Settings",
-        }}
+        options={{ headerShown: false, title: "Settings" }}
       />
       <Stack.Screen
         name="apiKeys"

@@ -10,9 +10,15 @@ import { Platform, Pressable, useColorScheme } from "react-native";
 import Colors from "@/constants/Colors";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Info } from "lucide-react-native";
+import { Settings } from "lucide-react-native";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -63,10 +69,10 @@ function RootLayoutNav() {
               headerTitle: "Contacts",
               headerShown: true,
               headerRight: () => (
-                <Link href="/modal" asChild>
+                <Link href="/settings" asChild>
                   <Pressable>
                     {({ pressed }) => (
-                      <Info
+                      <Settings
                         size={25}
                         color={Colors[colorScheme ?? "light"].text}
                         style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
@@ -84,7 +90,7 @@ function RootLayoutNav() {
               title: route.params.name,
             })}
           />
-          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+          <Stack.Screen name="settings" options={{ presentation: "modal" }} />
         </Stack>
       </ThemeProvider>
     </QueryClientProvider>

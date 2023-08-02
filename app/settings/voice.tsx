@@ -6,7 +6,7 @@ import List from "@/components/List";
 import { Text } from "@/components/Text";
 
 const Voice = () => {
-  const { data: voices, isLoading } = useElevenLabsVoices();
+  const { data: voices, isLoading, isError } = useElevenLabsVoices();
   const [selectedVoice, setSelectedVoice] = useAsyncStore((a) => [
     a.voice,
     a.setVoice,
@@ -14,20 +14,22 @@ const Voice = () => {
 
   return (
     <ScrollView>
-      <List.Container style={styles.container}>
-        {isLoading ? (
-          <Text>Loading...</Text>
-        ) : (
-          voices?.voices.map((voice: { name: string; voice_id: string }) => (
+      {isLoading ? (
+        <Text>Loading...</Text>
+      ) : isError ? (
+        <Text>Error - check your elevenlabs api key.</Text>
+      ) : (
+        <List.Container style={styles.container}>
+          {voices?.voices.map((voice: { name: string; voice_id: string }) => (
             <List.Item key={voice.name} onPress={() => setSelectedVoice(voice)}>
               <Text>
                 {voice.name}{" "}
                 {selectedVoice?.voice_id === voice.voice_id ? " SELECTED" : ""}
               </Text>
             </List.Item>
-          ))
-        )}
-      </List.Container>
+          ))}
+        </List.Container>
+      )}
     </ScrollView>
   );
 };
