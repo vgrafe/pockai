@@ -1,7 +1,7 @@
 import List from "@/components/List";
 import { Text } from "@/components/Text";
 import { View } from "react-native";
-import { useAsyncStore } from "@/lib/store";
+import { useAsyncStore } from "@/lib/asyncStore";
 import { Link } from "expo-router";
 import { styles } from "@/lib/styles";
 

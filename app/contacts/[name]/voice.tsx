@@ -1,7 +1,7 @@
 import { styles } from "@/lib/styles";
 import { useElevenLabsVoices } from "@/lib/queries";
 import { ScrollView, View } from "react-native";
-import { useAsyncStore } from "@/lib/store";
+import { useAsyncStore } from "@/lib/asyncStore";
 import List from "@/components/List";
 import { Text } from "@/components/Text";
 
