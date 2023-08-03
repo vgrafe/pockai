@@ -1,30 +1,45 @@
-import { StyleSheet } from "react-native";
-import { View, ViewProps } from "./View";
+import { ThemeProps, useThemeColor } from "@/lib/theme";
+import { StyleSheet, TouchableHighlightProps, Pressable } from "react-native";
+import { View, ViewProps } from "react-native";
 
-const Container = (props: ViewProps) => {
-  const { style, ...otherProps } = props;
-  return <View style={[styles.container, style]} {...otherProps} />;
-};
+const Item = (
+  props: ThemeProps &
+    ViewProps & {
+      onPress?: TouchableHighlightProps["onPress"];
+    }
+) => {
+  const { style, lightColor, darkColor, onPress, ...otherProps } = props;
 
-const Item = (props: ViewProps) => {
-  const { style, ...otherProps } = props;
-  return <View style={[styles.item, style]} {...otherProps} />;
+  const [backgroundColor] = useThemeColor([
+    {
+      colorName: "background",
+      overrides: { light: lightColor, dark: darkColor },
+    },
+  ]);
+
+  if (onPress)
+    return (
+      <Pressable onPress={onPress}>
+        <View
+          style={[styles.item, { backgroundColor }, style]}
+          {...otherProps}
+        />
+      </Pressable>
+    );
+  return (
+    <View style={[styles.item, { backgroundColor }, style]} {...otherProps} />
+  );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    borderColor: "#8888",
-    borderWidth: 1,
-    borderRadius: 4,
-  },
   item: {
-    borderColor: "#8888",
-    borderBottomWidth: 1,
+    borderColor: "#7777",
+    borderBottomWidth: 0.5,
+    borderTopWidth: 0.5,
     padding: 12,
   },
 });
 
 export default {
-  Container,
   Item,
 };

@@ -23,6 +23,14 @@ export function TextInput(props: InputProps) {
     <DefaultTextInput
       style={[
         {
+          borderWidth: 1,
+          borderColor: "#ccc",
+          borderRadius: 4,
+          padding: 8,
+          fontSize: 16,
+          lineHeight: 24,
+        },
+        {
           color,
           backgroundColor,
         },

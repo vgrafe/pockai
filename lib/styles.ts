@@ -6,6 +6,10 @@ export const styles = StyleSheet.create({
     margin: 24,
     display: "flex",
     justifyContent: "center",
-    backgroundColor: "transparent",
+  },
+  centeredContent: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
   },
 });

@@ -17,3 +17,9 @@ interface Personality {
   voiceName?: string;
   voiceId?: string;
 }
+
+type Contact = {
+  name: string;
+  prompt: string;
+  voiceId?: string;
+};

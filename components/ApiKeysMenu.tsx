@@ -1,13 +1,13 @@
 import React from "react";
 import { View, StyleSheet, Platform } from "react-native";
-import { useApiTokens } from "@/lib/secureStore";
+import { useSecureStore } from "@/lib/secureStore";
 import { TextInput } from "@/components/TextInput";
 import { ExternalLink } from "@/components/ExternalLink";
 import { styles } from "@/lib/styles";
 import { Text } from "@/components/Text";
 
-const ApiKeys = () => {
-  const { openAi, elevenLabs, setElevenLabs, setOpenAi } = useApiTokens();
+const ApiKeysMenu = () => {
+  const { openAi, elevenLabs, setElevenLabs, setOpenAi } = useSecureStore();
 
   return (
     <View
@@ -63,13 +63,8 @@ const localStyles = StyleSheet.create({
     marginBottom: 8,
   },
   input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 4,
-    padding: 8,
-    fontSize: 16,
     alignSelf: "stretch",
   },
 });
 
-export default ApiKeys;
+export default ApiKeysMenu;

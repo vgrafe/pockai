@@ -7,12 +7,13 @@ import {
   sayWithSystemSpeech,
 } from "@/lib/text-to-speech";
 import { playSound, useRecorder } from "@/lib/audio";
-import { systemPrompt } from "@/lib/defaultPersona";
 import { Bubble } from "@/components/Bubble";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useApiTokens } from "@/lib/secureStore";
+import { useSecureStore } from "@/lib/secureStore";
 import { Link } from "expo-router";
 import { Text } from "@/components/Text";
+import { useAsyncStore } from "@/lib/asyncStore";
+import { useCurrentContact } from "@/lib/useCurrentContact";
 
 // const CHATGPT_35_COST_PER_TOKEN = 0.000002;
 // const WHISPER_COST_PER_MINUTE = 0.006;
@@ -23,7 +24,9 @@ const Recorder = () => {
   const [tokensUsed, setTokensUsed] = useState(0);
   const [audioBlob, setAudioBlob] = useState<Blob>();
 
-  const [openAi, elevenLabs] = useApiTokens((a) => [a.openAi, a.elevenLabs]);
+  const { currentContact } = useCurrentContact();
+
+  const [openAi, elevenLabs] = useSecureStore((a) => [a.openAi, a.elevenLabs]);
 
   useEffect(() => {
     const loadTokenUse = async () => {
@@ -40,7 +43,7 @@ const Recorder = () => {
   const [chatLines, setChatLines] = useState<ChatCompletionRequestMessage[]>([
     {
       role: "system",
-      content: systemPrompt,
+      content: currentContact!.prompt,
     },
   ]);
 
@@ -136,7 +139,8 @@ const Recorder = () => {
       )}
       {actualChatLines.length === 0 && (
         <Text style={{ marginTop: "30%", fontSize: 24, textAlign: "center" }}>
-          press and hold the button, talk to me, then release
+          press and hold the button, talk to {currentContact?.name}, then
+          release
         </Text>
       )}
       <ScrollView

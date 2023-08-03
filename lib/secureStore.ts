@@ -4,7 +4,7 @@ import { combine, createJSONStorage, persist } from "zustand/middleware";
 
 import { Platform } from "react-native";
 
-export const useApiTokens = create(
+export const useSecureStore = create(
   persist(
     combine({ openAi: "", elevenLabs: "" }, (set) => ({
       setOpenAi: (openAi: string) => set({ openAi }),
