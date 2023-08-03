@@ -139,7 +139,8 @@ const Recorder = () => {
       )}
       {actualChatLines.length === 0 && (
         <Text style={{ marginTop: "30%", fontSize: 24, textAlign: "center" }}>
-          press and hold the button, talk to me, then release
+          press and hold the button, talk to {currentContact?.name}, then
+          release
         </Text>
       )}
       <ScrollView
