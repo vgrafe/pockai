@@ -14,7 +14,9 @@ const Voice = () => {
   return (
     <ScrollView>
       {isLoading ? (
-        <Text>Loading...</Text>
+        <View style={styles.centeredContent}>
+          <Text>Loading...</Text>
+        </View>
       ) : isError ? (
         <View style={styles.centeredContent}>
           <Text>

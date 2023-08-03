@@ -16,7 +16,11 @@ export function Text(props: TextProps) {
 
   return (
     <DefaultText
-      style={[{ color }, { fontWeight: "300", fontSize: 16 }, style]}
+      style={[
+        { color },
+        { fontWeight: "300", fontSize: 16, lineHeight: 24 },
+        style,
+      ]}
       {...otherProps}
     />
   );
