@@ -1,6 +1,6 @@
 import List from "@/components/List";
 import { Text } from "@/components/Text";
-import { View } from "react-native";
+import { Button, View } from "react-native";
 import { useAsyncStore } from "@/lib/asyncStore";
 import { Link } from "expo-router";
 import { styles } from "@/lib/styles";
@@ -47,6 +47,13 @@ const Contacts = () => {
           </Text>
         </View>
       )}
+      <View
+        style={{
+          alignSelf: "center",
+        }}
+      >
+        <Button title="Add Contact - coming soon!" />
+      </View>
     </View>
   );
 };
