@@ -21,9 +21,10 @@ const Voice = () => {
           {voices?.voices.map((voice: { name: string; voice_id: string }) => (
             <List.Item
               key={voice.name}
-              onPress={() =>
-                updateContact({ ...currentContact!, voiceId: voice.voice_id })
-              }
+              onPress={() => {
+                debugger;
+                updateContact({ ...currentContact!, voiceId: voice.voice_id });
+              }}
             >
               <Text>
                 {voice.name}{" "}

@@ -9,8 +9,8 @@ export const useCurrentContact = () => {
   const currentContact = store.contacts.find((c) => c.name === params.name);
 
   const updateContact = (update: Contact) => {
-    store.contacts = store.contacts.map((c) =>
-      c.name === params.name ? update : c
+    store.setContacts(
+      store.contacts.map((c) => (c.name === params.name ? update : c))
     );
   };
 
