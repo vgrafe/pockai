@@ -30,8 +30,6 @@ const Contacts = () => {
     contacts[0].name === "jean" &&
     contacts[0].voiceId === "TxGEqnHWrfWFTfGW9XjX";
 
-  console.log(contacts);
-
   return (
     <View>
       {contacts.map((contact) => (

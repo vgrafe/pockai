@@ -28,6 +28,7 @@ export function TextInput(props: InputProps) {
           borderRadius: 4,
           padding: 8,
           fontSize: 16,
+          lineHeight: 24,
         },
         {
           color,

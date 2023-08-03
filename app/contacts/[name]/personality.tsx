@@ -14,7 +14,7 @@ const SystemPrompt = () => {
         }}
         multiline
         numberOfLines={25}
-        style={{ padding: 8, borderRadius: 8, fontSize: 16, lineHeight: 24 }}
+        style={{ padding: 8, borderRadius: 8, fontSize: 16 }}
       />
     </ScrollView>
   );
