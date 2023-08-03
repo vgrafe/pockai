@@ -22,7 +22,6 @@ const Voice = () => {
             <List.Item
               key={voice.name}
               onPress={() => {
-                debugger;
                 updateContact({ ...currentContact!, voiceId: voice.voice_id });
               }}
             >
