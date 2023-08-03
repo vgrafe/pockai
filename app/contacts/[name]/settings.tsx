@@ -14,7 +14,9 @@ export default function Settings() {
         </Link>
       </List.Item>
       <List.Item>
-        <Text>prompt</Text>
+        <Link href={`/contacts/${params.name}/personality`}>
+          <Text>personality</Text>
+        </Link>
       </List.Item>
     </View>
   );

@@ -63,11 +63,6 @@ const localStyles = StyleSheet.create({
     marginBottom: 8,
   },
   input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 4,
-    padding: 8,
-    fontSize: 16,
     alignSelf: "stretch",
   },
 });
