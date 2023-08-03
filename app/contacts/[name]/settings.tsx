@@ -9,13 +9,13 @@ export default function Settings() {
   return (
     <View>
       <List.Item>
-        <Link href={`/contacts/${params.name}/voice`}>
-          <Text>voice</Text>
+        <Link href={`/contacts/${params.name}/personality`}>
+          <Text>personality</Text>
         </Link>
       </List.Item>
       <List.Item>
-        <Link href={`/contacts/${params.name}/personality`}>
-          <Text>personality</Text>
+        <Link href={`/contacts/${params.name}/voice`}>
+          <Text>voice</Text>
         </Link>
       </List.Item>
     </View>

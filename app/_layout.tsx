@@ -66,7 +66,7 @@ function RootLayoutNav() {
           <Stack.Screen
             name="index"
             options={{
-              headerTitle: "Contacts",
+              headerTitle: "Your AI contacts",
               headerShown: true,
               headerRight: () => (
                 <Link href="/settings" asChild>
@@ -101,6 +101,20 @@ function RootLayoutNav() {
                   </Pressable>
                 </Link>
               ),
+            })}
+          />
+          <Stack.Screen
+            name="contacts/[name]/settings"
+            // @ts-expect-error
+            options={({ route }) => ({
+              title: `${route.params.name} - settings`,
+            })}
+          />
+          <Stack.Screen
+            name="contacts/[name]/voice"
+            // @ts-expect-error
+            options={({ route }) => ({
+              title: `${route.params.name} - voice`,
             })}
           />
           <Stack.Screen name="settings" options={{ presentation: "modal" }} />

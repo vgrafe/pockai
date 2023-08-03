@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { useAsyncStore } from "@/lib/asyncStore";
 import { Link } from "expo-router";
 import { styles } from "@/lib/styles";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { systemPrompt } from "@/lib/defaultPersona";
 
 const Contacts = () => {
@@ -25,13 +25,12 @@ const Contacts = () => {
     }
   }, []);
 
-  if (contacts.length === 0) {
-    return (
-      <View style={styles.centeredContent}>
-        <Text>no contacts</Text>
-      </View>
-    );
-  }
+  const showIntroText =
+    contacts.length === 1 &&
+    contacts[0].name === "jean" &&
+    contacts[0].voiceId === "TxGEqnHWrfWFTfGW9XjX";
+
+  console.log(contacts);
 
   return (
     <View>
@@ -42,6 +41,14 @@ const Contacts = () => {
           </Link>
         </List.Item>
       ))}
+      {showIntroText && (
+        <View style={styles.centeredContent}>
+          <Text>
+            You have no contacts, so we added {contacts[0].name} for you. Go
+            ahead and click on it to start chatting!
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

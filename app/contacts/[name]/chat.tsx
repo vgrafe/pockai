@@ -9,8 +9,8 @@ import {
 import { playSound, useRecorder } from "@/lib/audio";
 import { Bubble } from "@/components/Bubble";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useApiTokens } from "@/lib/secureStore";
-import { Link, useLocalSearchParams } from "expo-router";
+import { useSecureStore } from "@/lib/secureStore";
+import { Link } from "expo-router";
 import { Text } from "@/components/Text";
 import { useAsyncStore } from "@/lib/asyncStore";
 import { useCurrentContact } from "@/lib/useCurrentContact";
@@ -26,7 +26,7 @@ const Recorder = () => {
 
   const { currentContact } = useCurrentContact();
 
-  const [openAi, elevenLabs] = useApiTokens((a) => [a.openAi, a.elevenLabs]);
+  const [openAi, elevenLabs] = useSecureStore((a) => [a.openAi, a.elevenLabs]);
 
   useEffect(() => {
     const loadTokenUse = async () => {

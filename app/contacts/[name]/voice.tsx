@@ -4,6 +4,7 @@ import { ScrollView, View } from "react-native";
 import List from "@/components/List";
 import { Text } from "@/components/Text";
 import { useCurrentContact } from "@/lib/useCurrentContact";
+import { Link } from "expo-router";
 
 const Voice = () => {
   const { data: voices, isLoading, isError } = useElevenLabsVoices();
@@ -15,9 +16,17 @@ const Voice = () => {
       {isLoading ? (
         <Text>Loading...</Text>
       ) : isError ? (
-        <Text>Error - check your elevenlabs api key.</Text>
+        <View style={styles.centeredContent}>
+          <Text>
+            Your elevenlabs api key is not valid, double check it in the main
+            settings.
+          </Text>
+          <Link href="/settings">
+            <Text style={{ marginBottom: 16 }}>go to settings</Text>
+          </Link>
+        </View>
       ) : (
-        <View style={styles.container}>
+        <View>
           {voices?.voices.map((voice: { name: string; voice_id: string }) => (
             <List.Item
               key={voice.name}
