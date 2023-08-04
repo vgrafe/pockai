@@ -1,11 +1,12 @@
 import List from "@/components/List";
 import { Text } from "@/components/Text";
-import { Button, View } from "react-native";
+import { View } from "react-native";
 import { useAsyncStore } from "@/lib/asyncStore";
 import { Link } from "expo-router";
 import { styles } from "@/lib/styles";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { systemPrompt } from "@/lib/defaultPersona";
+import { Button } from "@/components/Button";
 
 const Contacts = () => {
   const [contacts, setContacts] = useAsyncStore((a) => [
