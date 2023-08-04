@@ -125,6 +125,10 @@ function RootLayoutNav() {
             })}
           />
           <Stack.Screen name="settings" options={{ presentation: "modal" }} />
+          <Stack.Screen
+            name="contacts/new"
+            options={{ presentation: "modal" }}
+          />
         </Stack>
       </ThemeProvider>
     </QueryClientProvider>

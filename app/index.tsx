@@ -51,9 +51,12 @@ const Contacts = () => {
       <View
         style={{
           alignSelf: "center",
+          marginTop: 32,
         }}
       >
-        <Button title="Add Contact - coming soon!" />
+        <Link asChild href="/contacts/new">
+          <Button title="Add Contact" />
+        </Link>
       </View>
     </View>
   );

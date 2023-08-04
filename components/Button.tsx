@@ -1,8 +1,15 @@
-import { StyleSheet, Pressable, View, ViewProps, Platform } from "react-native";
+import {
+  StyleSheet,
+  Pressable,
+  View,
+  ViewProps,
+  PressableProps,
+} from "react-native";
 import { ThemeProps, useThemeColor } from "../lib/theme";
 import { Text } from "./Text";
 
-export type ButtonProps = ThemeProps & ViewProps & { title: string };
+export type ButtonProps = ThemeProps &
+  PressableProps & { title: string; style?: ViewProps["style"] };
 
 export function Button(props: ButtonProps) {
   const { lightColor, darkColor, title, style, ...otherProps } = props;
