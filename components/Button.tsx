@@ -25,7 +25,8 @@ export function Button(props: ButtonProps) {
 
 const baseStyle = StyleSheet.create({
   button: {
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "#8888",
