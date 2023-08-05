@@ -6,14 +6,16 @@ export const useAsyncStore = create(
   persist(
     combine(
       {
+        showOnboarding: true as boolean,
         contacts: [] as Contact[],
       },
       (set) => ({
         setContacts: (contacts: Contact[]) => set({ contacts }),
+        setShowOnboarding: (showOnboarding: boolean) => set({ showOnboarding }),
       })
     ),
     {
-      name: "persona",
+      name: "pockai",
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

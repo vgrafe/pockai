@@ -11,6 +11,7 @@ import Colors from "@/constants/Colors";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Settings, Info } from "lucide-react-native";
+import { useAsyncStore } from "@/lib/asyncStore";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -59,6 +60,8 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
+  const showOnboarding = useAsyncStore((a) => a.showOnboarding);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
@@ -67,7 +70,7 @@ function RootLayoutNav() {
             name="index"
             options={{
               headerTitle: "Your AI contacts",
-              headerShown: true,
+              headerShown: !showOnboarding,
               headerRight: () => (
                 <Link href="/settings" asChild>
                   <Pressable>

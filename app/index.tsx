@@ -9,10 +9,13 @@ import { defaultPersonality } from "@/lib/defaultPersona";
 import { Button } from "@/components/Button";
 
 const Contacts = () => {
-  const [contacts, setContacts] = useAsyncStore((a) => [
-    a.contacts,
-    a.setContacts,
-  ]);
+  const [contacts, setContacts, showOnboarding, setShowOnboarding] =
+    useAsyncStore((a) => [
+      a.contacts,
+      a.setContacts,
+      a.showOnboarding,
+      a.setShowOnboarding,
+    ]);
 
   useEffect(() => {
     if (contacts.length === 0) {
@@ -26,6 +29,14 @@ const Contacts = () => {
   }, []);
 
   const showIntroText = contacts.length === 1 && contacts[0].name === "jean";
+
+  if (showOnboarding)
+    return (
+      <View>
+        <Text>Onboarding</Text>
+        <Button title="close" onPress={() => setShowOnboarding(false)} />
+      </View>
+    );
 
   return (
     <View>
