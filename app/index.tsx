@@ -7,6 +7,7 @@ import { styles } from "@/lib/styles";
 import { useEffect } from "react";
 import { defaultPersonality } from "@/lib/defaultPersona";
 import { Button } from "@/components/Button";
+import { Onboarding } from "@/components/Onboarding";
 
 const Contacts = () => {
   const [contacts, setContacts, showOnboarding, setShowOnboarding] =
@@ -32,9 +33,13 @@ const Contacts = () => {
 
   if (showOnboarding)
     return (
-      <View>
-        <Text>Onboarding</Text>
-        <Button title="close" onPress={() => setShowOnboarding(false)} />
+      <View style={{ gap: 12, margin: 12 }}>
+        <Onboarding />
+        <Button
+          style={{ alignSelf: "center" }}
+          title="close"
+          onPress={() => setShowOnboarding(false)}
+        />
       </View>
     );
 

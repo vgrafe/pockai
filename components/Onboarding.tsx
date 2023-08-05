@@ -1,0 +1,40 @@
+import { View } from "react-native";
+import { Text } from "./Text";
+
+export const Onboarding = () => (
+  <View
+    style={{
+      gap: 12,
+      flex: 1,
+      flexDirection: "column",
+      alignItems: "center",
+      maxWidth: 500,
+      marginHorizontal: "auto",
+    }}
+  >
+    <Text style={{ fontSize: 22, fontWeight: "400" }}>Welcome to Pockai!</Text>
+    <Text
+      style={{
+        textAlign: "center",
+      }}
+    >
+      Pockai combines the prowess of OpenAI's ChatGPT and ElevenLabs' Whisper
+      system to create a unique mobile experience: a customizable contact list
+      where each contact is powered by AI with a personality of your choosing!
+      Want to chat with a fictional character, an emulation of a historical
+      figure, or perhaps a custom persona you've dreamt up? PersonaChat lets you
+      craft conversations with them, giving a voice to your imagination.
+    </Text>
+    <Text style={{ fontSize: 20, marginTop: 20, fontWeight: "400" }}>
+      Where to start
+    </Text>
+    <Text
+      style={{
+        textAlign: "center",
+      }}
+    >
+      Start with the default contact/personality, or create your own contacts,
+      define their personality then chat with them!
+    </Text>
+  </View>
+);
