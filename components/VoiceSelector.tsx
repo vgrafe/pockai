@@ -1,9 +1,9 @@
 import { styles } from "@/lib/styles";
 import { useElevenLabsVoices } from "@/lib/queries";
-import { ScrollView, View } from "react-native";
+import { Button, ScrollView, View } from "react-native";
 import List from "@/components/List";
 import { Text } from "@/components/Text";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 
 type VoiceSelectorProps = {
   selectedVoiceId?: string;
@@ -12,6 +12,8 @@ type VoiceSelectorProps = {
 
 export const VoiceSelector = (props: VoiceSelectorProps) => {
   const { data: voices, isLoading, isError } = useElevenLabsVoices();
+
+  const router = useRouter();
 
   return (
     <ScrollView
@@ -29,14 +31,15 @@ export const VoiceSelector = (props: VoiceSelectorProps) => {
           <Text>Loading...</Text>
         </View>
       ) : isError ? (
-        <View style={styles.centeredContent}>
+        <View style={[styles.centeredContent, { gap: 16 }]}>
           <Text>
             Your elevenlabs api key is not valid, double check it in the main
             settings.
           </Text>
-          <Link href="/settings">
-            <Text style={{ marginBottom: 16 }}>go to settings</Text>
-          </Link>
+          <Button
+            onPress={() => router.push("/settings")}
+            title="go to settings"
+          />
         </View>
       ) : (
         <View>

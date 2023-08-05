@@ -10,10 +10,11 @@ import { playSound, useRecorder } from "@/lib/audio";
 import { Bubble } from "@/components/Bubble";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSecureStore } from "@/lib/secureStore";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { Text } from "@/components/Text";
 import { useCurrentContact } from "@/lib/useCurrentContact";
 import { getSystemPrompt } from "@/lib/defaultPersona";
+import { Button } from "@/components/Button";
 
 // const CHATGPT_35_COST_PER_TOKEN = 0.000002;
 // const WHISPER_COST_PER_MINUTE = 0.006;
@@ -122,6 +123,8 @@ const Recorder = () => {
     scrollRef.current?.scrollToEnd({ animated: true });
   }, [actualChatLines.length, actualChatLines.at(-1)?.content]);
 
+  const router = useRouter();
+
   return (
     <SafeAreaView
       style={{
@@ -136,9 +139,11 @@ const Recorder = () => {
           <Text style={{ marginBottom: 16 }}>
             please set your api keys in settings
           </Text>
-          <Link href="/settings">
-            <Text style={{ marginBottom: 16 }}>go to settings</Text>
-          </Link>
+          <Button
+            style={{ marginBottom: 16 }}
+            onPress={() => router.push("/settings")}
+            title="go to settings"
+          />
         </>
       )}
       {actualChatLines.length === 0 && (
