@@ -14,7 +14,7 @@ export const useSecureStore = create(
       name: "apiTokens",
       storage: createJSONStorage(() =>
         Platform.OS === "web"
-          ? localStorage
+          ? sessionStorage
           : {
               setItem: setItemAsync,
               getItem: getItemAsync,

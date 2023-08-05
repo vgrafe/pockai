@@ -21,7 +21,7 @@ const ApiKeysMenu = () => {
       <Text>
         Pockai needs two api keys to function. Those are saved in your{" "}
         {Platform.OS === "web"
-          ? "browser's localStorage"
+          ? "browser's session storage"
           : "device secured storage"}{" "}
         and never uploaded. They are only used in the respective api calls
         necessary for the experience to work.
