@@ -12,7 +12,7 @@ export const getElevenLabsVoices = async (elevenLabsKey: string) =>
 export const callElevenLabsWithText = async (
   text: string,
   elevenLabsKey: string,
-  voiceId: string
+  voiceId?: string
 ) => {
   if (!voiceId) {
     throw new Error("No voice selected");
