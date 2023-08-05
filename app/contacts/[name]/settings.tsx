@@ -27,15 +27,14 @@ export default function Settings() {
           <Text>voice</Text>
         </Link>
       </List.Item>
-      <List.Item>
-        <Button
-          onPress={() => {
-            setContacts(contacts.filter((c) => c.name !== params.name));
-            router.push("/");
-          }}
-          title="delete"
-        />
-      </List.Item>
+      <Button
+        style={{ margin: 12 }}
+        onPress={() => {
+          setContacts(contacts.filter((c) => c.name !== params.name));
+          router.push("/");
+        }}
+        title="delete"
+      />
     </View>
   );
 }

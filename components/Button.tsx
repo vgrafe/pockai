@@ -32,8 +32,8 @@ export function Button(props: ButtonProps) {
 
 const baseStyle = StyleSheet.create({
   button: {
-    paddingHorizontal: 10,
-    paddingVertical: 6,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "#8888",
@@ -42,5 +42,6 @@ const baseStyle = StyleSheet.create({
   },
   text: {
     fontWeight: "400",
+    textAlign: "center",
   },
 });
