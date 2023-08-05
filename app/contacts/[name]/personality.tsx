@@ -12,13 +12,14 @@ const SystemPrompt = () => {
       <Text style={{ margin: 4, marginBottom: 12 }}>
         The following is what will be used for OpenAI's ChatGPT "system prompt".
         This is an initial prompt that is useful to describe personality you
-        want to talk to.
+        want to talk to. It is enhanced by the app to make the responses more
+        human and less verbose.
       </Text>
       <ScrollView>
         <TextInput
-          value={currentContact?.prompt}
-          onChangeText={(text) => {
-            updateContact({ ...currentContact!, prompt: text });
+          value={currentContact?.personality}
+          onChangeText={(personality) => {
+            updateContact({ ...currentContact!, personality });
           }}
           multiline
           numberOfLines={25}

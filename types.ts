@@ -4,22 +4,8 @@ interface ChatCompletionRequestMessage {
   name?: string;
 }
 
-interface Persona {
-  personality: string;
-  location: string;
-  conversationStyle: string;
-  resiliency: string;
-}
-
-interface Personality {
-  name: string;
-  description?: string;
-  voiceName?: string;
-  voiceId?: string;
-}
-
 type Contact = {
   name: string;
-  prompt: string;
+  personality: string;
   voiceId?: string;
 };

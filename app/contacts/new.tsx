@@ -7,9 +7,9 @@ import { useState } from "react";
 import { View } from "react-native";
 
 export default function NewContact() {
-  const [newContact, setNewContact] = useState({
+  const [newContact, setNewContact] = useState<Contact>({
     name: "",
-    prompt: "",
+    personality: "",
     voiceId: "",
   });
 
@@ -27,10 +27,12 @@ export default function NewContact() {
         value={newContact.name}
         onChangeText={(name) => setNewContact((c) => ({ ...c, name }))}
       />
-      <Text>prompt</Text>
+      <Text>personality</Text>
       <TextInput
-        value={newContact.prompt}
-        onChangeText={(prompt) => setNewContact((c) => ({ ...c, prompt }))}
+        value={newContact.personality}
+        onChangeText={(personality) =>
+          setNewContact((c) => ({ ...c, personality }))
+        }
       />
       <Button
         title="Save"

@@ -12,8 +12,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSecureStore } from "@/lib/secureStore";
 import { Link } from "expo-router";
 import { Text } from "@/components/Text";
-import { useAsyncStore } from "@/lib/asyncStore";
 import { useCurrentContact } from "@/lib/useCurrentContact";
+import { getSystemPrompt } from "@/lib/defaultPersona";
 
 // const CHATGPT_35_COST_PER_TOKEN = 0.000002;
 // const WHISPER_COST_PER_MINUTE = 0.006;
@@ -43,7 +43,7 @@ const Recorder = () => {
   const [chatLines, setChatLines] = useState<ChatCompletionRequestMessage[]>([
     {
       role: "system",
-      content: currentContact!.prompt,
+      content: getSystemPrompt(currentContact!.personality),
     },
   ]);
 
@@ -96,7 +96,11 @@ const Recorder = () => {
       if (elevenLabs && elevenLabs.length > 0) {
         setStatus("vocalizing");
         try {
-          const _audioBlob = await callElevenLabsWithText(response, elevenLabs);
+          const _audioBlob = await callElevenLabsWithText(
+            response,
+            elevenLabs,
+            currentContact!.voiceId
+          );
           setAudioBlob(_audioBlob);
           setStatus("speaking");
           await playSound(_audioBlob);

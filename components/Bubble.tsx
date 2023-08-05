@@ -3,9 +3,8 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
-import { useColorScheme, Animated } from "react-native";
+import { useColorScheme, Animated, ViewProps } from "react-native";
 
-import { ViewProps } from "./View";
 import { Text } from "./Text";
 import { useEffect, useRef } from "react";
 
@@ -58,8 +57,6 @@ export function Bubble(
 ) {
   const {
     style,
-    lightColor,
-    darkColor,
     alignSelf,
     backgroundColor,
     children,

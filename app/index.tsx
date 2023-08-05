@@ -5,7 +5,7 @@ import { useAsyncStore } from "@/lib/asyncStore";
 import { Link } from "expo-router";
 import { styles } from "@/lib/styles";
 import { useEffect } from "react";
-import { systemPrompt } from "@/lib/defaultPersona";
+import { defaultPersonality } from "@/lib/defaultPersona";
 import { Button } from "@/components/Button";
 
 const Contacts = () => {
@@ -18,7 +18,7 @@ const Contacts = () => {
     if (contacts.length === 0) {
       const newContact = {
         name: "jean",
-        prompt: systemPrompt,
+        personality: defaultPersonality,
         voiceId: "TxGEqnHWrfWFTfGW9XjX",
       };
 

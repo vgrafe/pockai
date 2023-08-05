@@ -1,5 +1,4 @@
 import * as Speech from "expo-speech";
-import { useAsyncStore } from "./asyncStore";
 
 export const getElevenLabsVoices = async (elevenLabsKey: string) =>
   fetch("https://api.elevenlabs.io/v1/voices", {
@@ -12,10 +11,9 @@ export const getElevenLabsVoices = async (elevenLabsKey: string) =>
 
 export const callElevenLabsWithText = async (
   text: string,
-  elevenLabsKey: string
+  elevenLabsKey: string,
+  voiceId: string
 ) => {
-  const voiceId = useAsyncStore.getState().voice?.voice_id;
-
   if (!voiceId) {
     throw new Error("No voice selected");
   }
