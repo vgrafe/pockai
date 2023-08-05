@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Pressable,
-  View,
-  ViewProps,
-  PressableProps,
-} from "react-native";
+import { StyleSheet, Pressable, ViewProps, PressableProps } from "react-native";
 import { ThemeProps, useThemeColor } from "../lib/theme";
 import { Text } from "./Text";
 
@@ -13,6 +7,7 @@ export type ButtonProps = ThemeProps &
 
 export function Button(props: ButtonProps) {
   const { lightColor, darkColor, title, style, ...otherProps } = props;
+
   const [textColor, backgroundColor] = useThemeColor([
     { colorName: "text", overrides: { light: lightColor, dark: darkColor } },
     {
@@ -22,10 +17,11 @@ export function Button(props: ButtonProps) {
   ]);
 
   return (
-    <Pressable {...otherProps}>
-      <View style={[{ backgroundColor }, baseStyle.button, style]}>
-        <Text style={[{ color: textColor }, baseStyle.text]}>{title}</Text>
-      </View>
+    <Pressable
+      {...otherProps}
+      style={[{ backgroundColor }, baseStyle.button, style]}
+    >
+      <Text style={[{ color: textColor }, baseStyle.text]}>{title}</Text>
     </Pressable>
   );
 }
