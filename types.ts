@@ -8,4 +8,7 @@ type Contact = {
   name: string;
   personality: string;
   voiceId?: string;
+  voiceName?: string;
 };
+
+type Voice = { name: string; voice_id: string };

@@ -19,17 +19,13 @@ const Contacts = () => {
       const newContact = {
         name: "jean",
         personality: defaultPersonality,
-        voiceId: "TxGEqnHWrfWFTfGW9XjX",
       };
 
       setContacts([newContact]);
     }
   }, []);
 
-  const showIntroText =
-    contacts.length === 1 &&
-    contacts[0].name === "jean" &&
-    contacts[0].voiceId === "TxGEqnHWrfWFTfGW9XjX";
+  const showIntroText = contacts.length === 1 && contacts[0].name === "jean";
 
   return (
     <View>

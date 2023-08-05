@@ -3,13 +3,15 @@ import { useElevenLabsVoices } from "@/lib/queries";
 import { ScrollView, View } from "react-native";
 import List from "@/components/List";
 import { Text } from "@/components/Text";
-import { useCurrentContact } from "@/lib/useCurrentContact";
 import { Link } from "expo-router";
 
-const Voice = () => {
-  const { data: voices, isLoading, isError } = useElevenLabsVoices();
+type VoiceSelectorProps = {
+  selectedVoiceId?: string;
+  onSelect: (voice: Voice) => void;
+};
 
-  const { currentContact, updateContact } = useCurrentContact();
+export const VoiceSelector = (props: VoiceSelectorProps) => {
+  const { data: voices, isLoading, isError } = useElevenLabsVoices();
 
   return (
     <ScrollView>
@@ -29,16 +31,16 @@ const Voice = () => {
         </View>
       ) : (
         <View>
-          {voices?.voices.map((voice: { name: string; voice_id: string }) => (
+          {voices?.voices.map((voice: Voice) => (
             <List.Item
               key={voice.name}
               onPress={() => {
-                updateContact({ ...currentContact!, voiceId: voice.voice_id });
+                props.onSelect(voice);
               }}
             >
               <Text>
                 {voice.name}{" "}
-                {currentContact!.voiceId === voice.voice_id ? " SELECTED" : ""}
+                {props.selectedVoiceId === voice.voice_id ? " (selected)" : ""}
               </Text>
             </List.Item>
           ))}
@@ -47,5 +49,3 @@ const Voice = () => {
     </ScrollView>
   );
 };
-
-export default Voice;
