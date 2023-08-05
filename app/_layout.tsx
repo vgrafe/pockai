@@ -128,6 +128,7 @@ function RootLayoutNav() {
           <Stack.Screen
             name="contacts/new"
             options={{
+              title: "Add a new contact",
               presentation: "modal",
             }}
           />
