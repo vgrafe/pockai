@@ -14,7 +14,16 @@ export const VoiceSelector = (props: VoiceSelectorProps) => {
   const { data: voices, isLoading, isError } = useElevenLabsVoices();
 
   return (
-    <ScrollView>
+    <ScrollView
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 99999999,
+      }}
+    >
       {isLoading ? (
         <View style={styles.centeredContent}>
           <Text>Loading...</Text>

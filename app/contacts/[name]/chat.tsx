@@ -43,7 +43,7 @@ const Recorder = () => {
   const [chatLines, setChatLines] = useState<ChatCompletionRequestMessage[]>([
     {
       role: "system",
-      content: getSystemPrompt(currentContact!.personality),
+      content: getSystemPrompt(currentContact?.personality || ""),
     },
   ]);
 

@@ -34,7 +34,11 @@ export default function ContactForm(props: ContactFormProps) {
     );
 
   return (
-    <ScrollView>
+    <ScrollView
+      style={{
+        display: "flex",
+      }}
+    >
       <View style={{ gap: 12, margin: 12 }}>
         <Text style={{ marginLeft: 4, fontWeight: "500" }}>name</Text>
         <TextInput
@@ -60,14 +64,13 @@ export default function ContactForm(props: ContactFormProps) {
         {voices?.voices.length && (
           <>
             <Text style={{ marginLeft: 4, fontWeight: "500" }}>
-              voice synthesis
+              voice synthesis selection
             </Text>
             <Button
-              title={
-                contact.voiceName
-                  ? `voice: ${contact.voiceName}`
-                  : "select voice"
-              }
+              title={contact.voiceName || "not set"}
+              style={{
+                alignSelf: "flex-start",
+              }}
               onPress={() => setSelectingVoice(true)}
             />
           </>
