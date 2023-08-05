@@ -20,7 +20,7 @@ const Contacts = () => {
   useEffect(() => {
     if (contacts.length === 0) {
       const newContact = {
-        name: "jean",
+        name: "Nick",
         personality: defaultPersonality,
       };
 
@@ -28,7 +28,7 @@ const Contacts = () => {
     }
   }, []);
 
-  const showIntroText = contacts.length === 1 && contacts[0].name === "jean";
+  const showIntroText = contacts.length === 1 && contacts[0].name === "Nick";
 
   if (showOnboarding)
     return (
