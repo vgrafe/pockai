@@ -69,7 +69,7 @@ function RootLayoutNav() {
           <Stack.Screen
             name="index"
             options={{
-              headerTitle: "Your AI contacts",
+              headerTitle: "Contacts",
               headerShown: !showOnboarding,
               headerRight: () => (
                 <Link href="/settings" asChild>
