@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Pressable,
-  Keyboard,
 } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { callWhisperWithAudioUrl } from "@/lib/voice-to-text";
@@ -213,8 +212,9 @@ const Recorder = () => {
             </Text>
           )}
           {useMicrophone ? (
-            <View style={{ position: "relative" }}>
+            <View style={{ position: "relative", width: "80%" }}>
               <Pressable
+                hitSlop={10}
                 style={{ position: "absolute", bottom: "50%", left: 0 }}
                 onPress={() => setUseMicrophone(false)}
               >
@@ -256,13 +256,13 @@ const Recorder = () => {
               style={{
                 marginTop: 8,
                 flexDirection: "row",
-                gap: 8,
+                gap: 12,
                 alignSelf: "stretch",
                 alignItems: "center",
                 marginBottom: 32,
               }}
             >
-              <Pressable onPress={() => setUseMicrophone(true)}>
+              <Pressable hitSlop={10} onPress={() => setUseMicrophone(true)}>
                 <Mic2 color={iconColor} />
               </Pressable>
               <TextInput
@@ -276,7 +276,9 @@ const Recorder = () => {
                 }}
               />
               <Pressable
+                hitSlop={10}
                 onPress={() => {
+                  if (keyboardText.length === 0) return;
                   sendUserChat(keyboardText);
                   setKeyboardText("");
                 }}
