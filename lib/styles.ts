@@ -1,11 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StatusBar, StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
     maxWidth: 600,
-    margin: 24,
-    display: "flex",
-    justifyContent: "center",
   },
   centeredContent: {
     alignItems: "center",

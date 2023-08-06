@@ -1,6 +1,6 @@
 import { styles } from "@/lib/styles";
 import { useElevenLabsVoices } from "@/lib/queries";
-import { Button, ScrollView, View } from "react-native";
+import { Button, FlatList, ScrollView, View } from "react-native";
 import List from "@/components/List";
 import { Text } from "@/components/Text";
 import { Link, useRouter } from "expo-router";
@@ -16,16 +16,7 @@ export const VoiceSelector = (props: VoiceSelectorProps) => {
   const router = useRouter();
 
   return (
-    <ScrollView
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: 99999999,
-      }}
-    >
+    <View style={{ flex: 1 }}>
       {isLoading ? (
         <View style={styles.centeredContent}>
           <Text>Loading...</Text>
@@ -42,8 +33,9 @@ export const VoiceSelector = (props: VoiceSelectorProps) => {
           />
         </View>
       ) : (
-        <View>
-          {voices?.voices.map((voice: Voice) => (
+        <FlatList
+          data={voices?.voices}
+          renderItem={({ item: voice }) => (
             <List.Item
               key={voice.name}
               onPress={() => {
@@ -55,9 +47,10 @@ export const VoiceSelector = (props: VoiceSelectorProps) => {
                 {props.selectedVoiceId === voice.voice_id ? " (selected)" : ""}
               </Text>
             </List.Item>
-          ))}
-        </View>
+          )}
+          keyExtractor={(item) => item.id}
+        />
       )}
-    </ScrollView>
+    </View>
   );
 };
