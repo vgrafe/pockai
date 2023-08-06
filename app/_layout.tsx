@@ -78,7 +78,10 @@ function RootLayoutNav() {
                       <Settings
                         size={25}
                         color={Colors[colorScheme ?? "light"].text}
-                        style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                        style={{
+                          marginRight: 15,
+                          opacity: pressed ? 0.5 : 1,
+                        }}
                       />
                     )}
                   </Pressable>
@@ -98,7 +101,10 @@ function RootLayoutNav() {
                       <Info
                         size={25}
                         color={Colors[colorScheme ?? "light"].text}
-                        style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                        style={{
+                          marginRight: 15,
+                          opacity: pressed ? 0.5 : 1,
+                        }}
                       />
                     )}
                   </Pressable>
