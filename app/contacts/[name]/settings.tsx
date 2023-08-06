@@ -28,6 +28,7 @@ export default function Settings() {
         <Button
           title="delete contact"
           lightColor="#f77"
+          darkColor="#a44"
           onPress={() => {
             setContacts(
               contacts.filter((c) => c.name !== currentContact!.name)

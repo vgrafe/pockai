@@ -16,7 +16,7 @@ export const VoiceSelector = (props: VoiceSelectorProps) => {
   const router = useRouter();
 
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       {isLoading ? (
         <View style={styles.centeredContent}>
           <Text>Loading...</Text>
@@ -35,6 +35,7 @@ export const VoiceSelector = (props: VoiceSelectorProps) => {
       ) : (
         <FlatList
           data={voices?.voices}
+          style={{ width: 800 }}
           renderItem={({ item: voice }: { item: Voice }) => (
             <List.Item
               onPress={() => {

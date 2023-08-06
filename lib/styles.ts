@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     }),
   },
   centeredContent: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },

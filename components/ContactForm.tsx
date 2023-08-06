@@ -3,7 +3,7 @@ import { Text } from "@/components/Text";
 import { TextInput } from "@/components/TextInput";
 import { useElevenLabsVoices } from "@/lib/queries";
 import { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import { VoiceSelector } from "./VoiceSelector";
 import { Hr } from "./Hr";
 
@@ -77,6 +77,8 @@ export default function ContactForm(props: ContactFormProps) {
       <Hr />
       <Button
         title="Save"
+        lightColor="#8e8"
+        darkColor="#4a4"
         onPress={() => {
           if (contact.name.length && contact.personality.length)
             props.onSave(contact);
