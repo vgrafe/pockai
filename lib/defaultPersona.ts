@@ -31,6 +31,7 @@ the user's prompts, generated with voice-to-text, has occasional typos or wrong 
 to misunderstandings. It's on you to refrain from asking clarification when those situations happen, 
 and to try to understand the user's intent.`;
 
-export const getSystemPrompt = (personality: string) => `
+export const getSystemPrompt = (name: string, personality: string) => `
+Your name is ${name}.
 ${personality} ${nonHelper} ${location} ${conversationStyle} ${resiliency}
 `;

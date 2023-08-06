@@ -26,7 +26,7 @@ const Contacts = () => {
         history: [
           {
             role: "system" as OpenAiRole,
-            content: getSystemPrompt(defaultPersonality),
+            content: getSystemPrompt("Nick", defaultPersonality),
           },
         ],
       };
