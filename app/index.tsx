@@ -2,7 +2,7 @@ import List from "@/components/List";
 import { Text } from "@/components/Text";
 import { View } from "react-native";
 import { useAsyncStore } from "@/lib/asyncStore";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { styles } from "@/lib/styles";
 import { useEffect } from "react";
 import { defaultPersonality, getSystemPrompt } from "@/lib/defaultPersona";
@@ -45,15 +45,18 @@ const Contacts = () => {
       </View>
     );
 
+  const router = useRouter();
+
   return (
     <View style={{ flex: 1 }}>
       {contacts
         .filter((contact) => contact.name)
         .map((contact) => (
-          <List.Item key={contact.name}>
-            <Link href={`/contacts/${contact.name}/chat`}>
-              <Text>{contact.name}</Text>
-            </Link>
+          <List.Item
+            key={contact.name}
+            onPress={() => router.push(`/contacts/${contact.name}/chat`)}
+          >
+            <Text>{contact.name}</Text>
           </List.Item>
         ))}
       <View
