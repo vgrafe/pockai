@@ -134,7 +134,7 @@ const Recorder = () => {
         alignItems: "center",
       }}
     >
-      {!openAi && (
+      {!openAi ? (
         <>
           <Text style={{ marginBottom: 16 }}>
             please set your api keys in settings
@@ -145,73 +145,78 @@ const Recorder = () => {
             title="go to settings"
           />
         </>
-      )}
-      {actualChatLines.length === 0 && (
-        <Text style={{ marginTop: "30%", fontSize: 24, textAlign: "center" }}>
-          press and hold the button, talk to {currentContact?.name}, then
-          release
-        </Text>
-      )}
-      <ScrollView
-        ref={scrollRef}
-        style={{ display: "flex", width: "100%", maxWidth: 500 }}
-      >
-        {actualChatLines.map((line, i) => (
-          <Bubble
-            key={i}
-            alignSelf={line.role === "user" ? "flex-end" : "flex-start"}
-            backgroundColor={line.role === "user" ? "blue" : "gray"}
-            onPress={async () => {
-              if (
-                audioBlob &&
-                i == actualChatLines.length - 1 &&
-                status === "ready"
-              ) {
-                setStatus("speaking");
-                await playSound(audioBlob);
-                setStatus("ready");
-              }
+      ) : (
+        <>
+          {actualChatLines.length === 0 && (
+            <Text
+              style={{ marginTop: "30%", fontSize: 24, textAlign: "center" }}
+            >
+              press and hold the button, talk to {currentContact?.name}, then
+              release
+            </Text>
+          )}
+          <ScrollView
+            ref={scrollRef}
+            style={{ display: "flex", width: "100%", maxWidth: 500 }}
+          >
+            {actualChatLines.map((line, i) => (
+              <Bubble
+                key={i}
+                alignSelf={line.role === "user" ? "flex-end" : "flex-start"}
+                backgroundColor={line.role === "user" ? "blue" : "gray"}
+                onPress={async () => {
+                  if (
+                    audioBlob &&
+                    i == actualChatLines.length - 1 &&
+                    status === "ready"
+                  ) {
+                    setStatus("speaking");
+                    await playSound(audioBlob);
+                    setStatus("ready");
+                  }
+                }}
+              >
+                {line.content}
+              </Bubble>
+            ))}
+            {status === "answering" && (
+              <Bubble alignSelf="flex-start" backgroundColor="gray">
+                ...
+              </Bubble>
+            )}
+          </ScrollView>
+          <TouchableOpacity
+            style={{
+              width: 100,
+              height: 100,
+              backgroundColor: recording
+                ? "rgba(0,0,200,0.75)"
+                : "rgba(0,0,200,0.5)",
+              borderRadius: 50,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            disabled={status !== "ready" || !openAi}
+            onPressIn={() => {
+              if (status === "ready") startRecording();
+            }}
+            onPressOut={() => {
+              if (status === "ready") stopRecording();
             }}
           >
-            {line.content}
-          </Bubble>
-        ))}
-        {status === "answering" && (
-          <Bubble alignSelf="flex-start" backgroundColor="gray">
-            ...
-          </Bubble>
-        )}
-      </ScrollView>
-      <TouchableOpacity
-        style={{
-          width: 100,
-          height: 100,
-          backgroundColor: recording
-            ? "rgba(0,0,200,0.75)"
-            : "rgba(0,0,200,0.5)",
-          borderRadius: 50,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        disabled={status !== "ready" || !openAi}
-        onPressIn={() => {
-          if (status === "ready") startRecording();
-        }}
-        onPressOut={() => {
-          if (status === "ready") stopRecording();
-        }}
-      >
-        <View
-          style={{
-            width: 80,
-            height: 80,
-            borderRadius: 40,
-            backgroundColor: "white",
-          }}
-        />
-      </TouchableOpacity>
-      {/* <Text>{status}</Text> */}
-      <Text>{error}</Text>
+            <View
+              style={{
+                width: 80,
+                height: 80,
+                borderRadius: 40,
+                backgroundColor: "white",
+              }}
+            />
+          </TouchableOpacity>
+          {/* <Text>{status}</Text> */}
+          <Text>{error}</Text>
+        </>
+      )}
     </SafeAreaView>
   );
 };

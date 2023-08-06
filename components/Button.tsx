@@ -8,8 +8,7 @@ export type ButtonProps = ThemeProps &
 export function Button(props: ButtonProps) {
   const { lightColor, darkColor, title, style, ...otherProps } = props;
 
-  const [textColor, backgroundColor] = useThemeColor([
-    { colorName: "text", overrides: { light: lightColor, dark: darkColor } },
+  const [backgroundColor] = useThemeColor([
     {
       colorName: "background",
       overrides: { light: lightColor, dark: darkColor },
@@ -21,7 +20,7 @@ export function Button(props: ButtonProps) {
       {...otherProps}
       style={[{ backgroundColor }, baseStyle.button, style]}
     >
-      <Text style={[{ color: textColor }, baseStyle.text]}>{title}</Text>
+      <Text style={baseStyle.text}>{title}</Text>
     </Pressable>
   );
 }

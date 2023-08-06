@@ -33,8 +33,10 @@ export const Onboarding = () => (
         textAlign: "center",
       }}
     >
-      Start with the default contact/personality, or create your own contacts,
-      define their personality then chat with them!
+      First you'll need to get an api key from OpenAI, and optionally a key from
+      ElevelLabs. Set them in the settings menu. Then you can chat with the
+      default contact/personality, or create your own contacts, define their
+      personality then chat with them!
     </Text>
   </View>
 );

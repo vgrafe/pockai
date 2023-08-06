@@ -26,6 +26,8 @@ export default function Settings() {
       />
       <Button
         title="delete contact"
+        lightColor="#f77"
+        style={{ alignSelf: "center" }}
         onPress={() => {
           setContacts(contacts.filter((c) => c.name !== currentContact!.name));
           router.replace("/");
