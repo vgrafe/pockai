@@ -19,7 +19,7 @@ const ApiKeysMenu = () => {
       ]}
     >
       <Text>
-        Pockai needs two api keys to function. Those are saved in your{" "}
+        Pock.ai needs two api keys to function. Those are saved in your{" "}
         {Platform.OS === "web"
           ? "browser's session storage"
           : "device secured storage"}{" "}

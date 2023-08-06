@@ -13,13 +13,13 @@ export const Onboarding = () => (
       marginHorizontal: "auto",
     }}
   >
-    <Text style={{ fontSize: 22, fontWeight: "400" }}>Welcome to Pockai!</Text>
+    <Text style={{ fontSize: 22, fontWeight: "400" }}>Welcome to Pock.ai!</Text>
     <Text
       style={{
         textAlign: "center",
       }}
     >
-      Pockai combines the prowess of OpenAI's ChatGPT and ElevenLabs' Whisper
+      Pock.ai combines the prowess of OpenAI's ChatGPT and ElevenLabs' Whisper
       system to create a unique mobile experience: a customizable contact list
       where each contact is powered by AI with a personality of your choosing!
       Want to chat with a fictional character, an emulation of a historical
