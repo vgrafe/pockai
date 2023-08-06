@@ -19,7 +19,9 @@ const ApiKeysMenu = () => {
       ]}
     >
       <Text>
-        Pock.ai needs two api keys to function. Those are saved in your{" "}
+        You must provide at least one api key for Pock.ai to function. Those are
+        not sent to any server, all the data (including chat history) is stored
+        in the{" "}
         {Platform.OS === "web"
           ? "browser's session storage"
           : "device secured storage"}{" "}
