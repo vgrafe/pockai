@@ -1,5 +1,7 @@
+type OpenAiRole = "user" | "assistant" | "system";
+
 interface ChatCompletionRequestMessage {
-  role: "user" | "assistant" | "system";
+  role: OpenAiRole;
   content: string;
   name?: string;
 }

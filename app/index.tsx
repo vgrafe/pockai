@@ -5,7 +5,7 @@ import { useAsyncStore } from "@/lib/asyncStore";
 import { Link } from "expo-router";
 import { styles } from "@/lib/styles";
 import { useEffect } from "react";
-import { defaultPersonality } from "@/lib/defaultPersona";
+import { defaultPersonality, getSystemPrompt } from "@/lib/defaultPersona";
 import { Button } from "@/components/Button";
 import { Onboarding } from "@/components/Onboarding";
 
@@ -23,6 +23,12 @@ const Contacts = () => {
       const newContact = {
         name: "Nick",
         personality: defaultPersonality,
+        history: [
+          {
+            role: "system" as OpenAiRole,
+            content: getSystemPrompt(defaultPersonality),
+          },
+        ],
       };
 
       setContacts([newContact]);

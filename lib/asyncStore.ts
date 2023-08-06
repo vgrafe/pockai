@@ -15,7 +15,7 @@ export const useAsyncStore = create(
       })
     ),
     {
-      name: "pockai",
+      name: "pockai-1",
       storage: createJSONStorage(() => AsyncStorage),
     }
   )
