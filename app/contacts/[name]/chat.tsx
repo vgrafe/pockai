@@ -213,7 +213,6 @@ const Recorder = () => {
               }}
             />
           </TouchableOpacity>
-          {/* <Text>{status}</Text> */}
           <Text>{error}</Text>
         </>
       )}
