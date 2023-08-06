@@ -10,18 +10,20 @@ const Settings = () => {
       automaticallyAdjustKeyboardInsets
       style={[styles.container, { padding: 12 }]}
     >
-      <ApiKeysMenu />
-      <Text>
-        Thanks for giving a try to Pockai! I have bigger plans for this project.
-        I want to make a multiplayer game out of it. Let's see where it goes, if
-        it goes anywhere.
-      </Text>
-      <Text style={{ marginTop: 32 }}>
-        Made with 🌀 by{" "}
-        <ExternalLink style={{ fontWeight: "700" }} href="https://vgrafe.com">
-          vgrafe
-        </ExternalLink>
-      </Text>
+      <View style={{ gap: 32 }}>
+        <ApiKeysMenu />
+        <Text>
+          Thanks for giving a try to Pockai! I have bigger plans for this
+          project. I want to make a multiplayer game out of it. Let's see where
+          it goes, if it goes anywhere.
+        </Text>
+        <Text style={{ marginTop: 32 }}>
+          Made with 🌀 by{" "}
+          <ExternalLink style={{ fontWeight: "700" }} href="https://vgrafe.com">
+            vgrafe
+          </ExternalLink>
+        </Text>
+      </View>
     </ScrollView>
   );
 };

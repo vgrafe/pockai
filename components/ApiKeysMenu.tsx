@@ -59,7 +59,6 @@ const localStyles = StyleSheet.create({
     marginBottom: 16,
   },
   label: {
-    fontSize: 14,
     marginBottom: 8,
   },
   input: {
