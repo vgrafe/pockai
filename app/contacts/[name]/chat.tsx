@@ -26,7 +26,7 @@ const Recorder = () => {
   const [tokensUsed, setTokensUsed] = useState(0);
   const [audioBlob, setAudioBlob] = useState<Blob>();
 
-  const { currentContact } = useCurrentContact();
+  const { currentContact, updateContact } = useCurrentContact();
 
   const [openAi, elevenLabs] = useSecureStore((a) => [a.openAi, a.elevenLabs]);
 
@@ -41,13 +41,6 @@ const Recorder = () => {
   const [status, setStatus] = useState<
     "ready" | "understanding" | "answering" | "vocalizing" | "speaking"
   >("ready");
-
-  const [chatLines, setChatLines] = useState<ChatCompletionRequestMessage[]>([
-    {
-      role: "system",
-      content: getSystemPrompt(currentContact?.personality || ""),
-    },
-  ]);
 
   const { startRecording, stopRecording, recording } = useRecorder({
     onSoundRecorded: async (recording, minutes) => {
@@ -79,9 +72,12 @@ const Recorder = () => {
         content: transcription,
       } satisfies ChatCompletionRequestMessage;
 
-      const newChatLines = [...chatLines, newChatLine];
+      const newChatLines = [...currentContact!.history, newChatLine];
 
-      setChatLines(newChatLines);
+      updateContact({
+        ...currentContact!,
+        history: newChatLines,
+      });
 
       setStatus("answering");
 
@@ -93,7 +89,10 @@ const Recorder = () => {
       // await AsyncStorage.setItem("totalCost", (totalCost + gptCost).toString());
       // setTotalCost((t) => t + gptCost);
 
-      setChatLines((c) => [...c, { role: "assistant", content: response }]);
+      updateContact({
+        ...currentContact!,
+        history: [...newChatLines, { role: "assistant", content: response }],
+      });
 
       if (elevenLabs && elevenLabs.length > 0) {
         setStatus("vocalizing");
@@ -116,7 +115,9 @@ const Recorder = () => {
     },
   });
 
-  const actualChatLines = chatLines.filter((a) => a.role !== "system");
+  const actualChatLines = currentContact!.history.filter(
+    (a) => a.role !== "system"
+  );
 
   const scrollRef = useRef<ScrollView>(null);
 
@@ -181,6 +182,13 @@ const Recorder = () => {
               </Bubble>
             )}
           </ScrollView>
+          <Text
+            style={{
+              marginVertical: 32,
+            }}
+          >
+            {error}
+          </Text>
           <TouchableOpacity
             style={{
               width: 100,
@@ -191,7 +199,6 @@ const Recorder = () => {
               borderRadius: 50,
               justifyContent: "center",
               alignItems: "center",
-              marginVertical: 32,
             }}
             disabled={status !== "ready" || !openAi}
             onPressIn={() => {
@@ -210,13 +217,6 @@ const Recorder = () => {
               }}
             />
           </TouchableOpacity>
-          <Text
-            style={{
-              marginVertical: 32,
-            }}
-          >
-            {error}
-          </Text>
         </>
       )}
     </SafeAreaView>
