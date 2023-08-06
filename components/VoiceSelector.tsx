@@ -1,6 +1,12 @@
 import { styles } from "@/lib/styles";
 import { useElevenLabsVoices } from "@/lib/queries";
-import { Button, FlatList, ScrollView, View } from "react-native";
+import {
+  ActivityIndicator,
+  Button,
+  FlatList,
+  ScrollView,
+  View,
+} from "react-native";
 import List from "@/components/List";
 import { Text } from "@/components/Text";
 import { Link, useRouter } from "expo-router";
@@ -19,7 +25,7 @@ export const VoiceSelector = (props: VoiceSelectorProps) => {
     <View>
       {isLoading ? (
         <View style={styles.centeredContent}>
-          <Text>Loading...</Text>
+          <ActivityIndicator />
         </View>
       ) : isError ? (
         <View style={[styles.centeredContent, { gap: 16 }]}>
