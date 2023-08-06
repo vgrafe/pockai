@@ -15,6 +15,7 @@ import { Text } from "@/components/Text";
 import { useCurrentContact } from "@/lib/useCurrentContact";
 import { getSystemPrompt } from "@/lib/defaultPersona";
 import { Button } from "@/components/Button";
+import { styles } from "@/lib/styles";
 
 // const CHATGPT_35_COST_PER_TOKEN = 0.000002;
 // const WHISPER_COST_PER_MINUTE = 0.006;
@@ -126,14 +127,7 @@ const Recorder = () => {
   const router = useRouter();
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        margin: "5%",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <SafeAreaView style={[styles.container, { alignItems: "center" }]}>
       {!openAi ? (
         <>
           <Text style={{ marginBottom: 16 }}>
@@ -155,10 +149,7 @@ const Recorder = () => {
               release
             </Text>
           )}
-          <ScrollView
-            ref={scrollRef}
-            style={{ display: "flex", width: "100%", maxWidth: 500 }}
-          >
+          <ScrollView ref={scrollRef}>
             {actualChatLines.map((line, i) => (
               <Bubble
                 key={i}
@@ -195,6 +186,7 @@ const Recorder = () => {
               borderRadius: 50,
               justifyContent: "center",
               alignItems: "center",
+              marginVertical: 32,
             }}
             disabled={status !== "ready" || !openAi}
             onPressIn={() => {
@@ -213,7 +205,13 @@ const Recorder = () => {
               }}
             />
           </TouchableOpacity>
-          <Text>{error}</Text>
+          <Text
+            style={{
+              marginVertical: 32,
+            }}
+          >
+            {error}
+          </Text>
         </>
       )}
     </SafeAreaView>

@@ -1,5 +1,6 @@
 import ContactForm from "@/components/ContactForm";
 import { useAsyncStore } from "@/lib/asyncStore";
+import { styles } from "@/lib/styles";
 import { useRouter } from "expo-router";
 import { ScrollView, View } from "react-native";
 
@@ -12,7 +13,7 @@ export default function NewContact() {
   const router = useRouter();
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <ContactForm
         contact={{
           name: "",

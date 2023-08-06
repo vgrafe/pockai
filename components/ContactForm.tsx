@@ -10,6 +10,7 @@ import { Hr } from "./Hr";
 type ContactFormProps = {
   contact: Contact;
   onSave: (contact: Contact) => void;
+  children?: React.ReactNode;
 };
 
 export default function ContactForm(props: ContactFormProps) {
@@ -81,6 +82,7 @@ export default function ContactForm(props: ContactFormProps) {
             props.onSave(contact);
         }}
       />
+      {props.children}
     </View>
   );
 }
