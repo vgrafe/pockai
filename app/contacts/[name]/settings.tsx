@@ -3,7 +3,7 @@ import ContactForm from "@/components/ContactForm";
 import { useAsyncStore } from "@/lib/asyncStore";
 import { useCurrentContact } from "@/lib/useCurrentContact";
 import { useRouter } from "expo-router";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 export default function Settings() {
   const { currentContact, updateContact } = useCurrentContact();
@@ -16,7 +16,7 @@ export default function Settings() {
   ]);
 
   return (
-    <View style={{ gap: 12, margin: 12 }}>
+    <ScrollView>
       <ContactForm
         contact={currentContact!}
         onSave={(updatedContact) => {
@@ -32,6 +32,7 @@ export default function Settings() {
           router.replace("/");
         }}
       />
-    </View>
+      <View style={{ height: 100 }} />
+    </ScrollView>
   );
 }

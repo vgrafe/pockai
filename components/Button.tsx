@@ -1,9 +1,14 @@
-import { StyleSheet, Pressable, ViewProps, PressableProps } from "react-native";
+import {
+  StyleSheet,
+  ViewProps,
+  TouchableOpacityProps,
+  TouchableOpacity,
+} from "react-native";
 import { ThemeProps, useThemeColor } from "../lib/theme";
 import { Text } from "./Text";
 
 export type ButtonProps = ThemeProps &
-  PressableProps & { title: string; style?: ViewProps["style"] };
+  TouchableOpacityProps & { title: string; style?: ViewProps["style"] };
 
 export function Button(props: ButtonProps) {
   const { lightColor, darkColor, title, style, ...otherProps } = props;
@@ -16,12 +21,12 @@ export function Button(props: ButtonProps) {
   ]);
 
   return (
-    <Pressable
+    <TouchableOpacity
       {...otherProps}
       style={[{ backgroundColor }, baseStyle.button, style]}
     >
       <Text style={baseStyle.text}>{title}</Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
