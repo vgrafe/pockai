@@ -3,6 +3,9 @@
   "main": "expo-router/entry",
   "version": "1.0.1",
   "scripts": {
+    "eas:build": "eas build",
+    "eas:submit:ios": "eas submit -p ios",
+    "eas:submit:android": "eas submit -p android",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
