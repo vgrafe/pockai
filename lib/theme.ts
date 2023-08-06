@@ -14,7 +14,7 @@ export type ThemeProps = {
 
 type ThemeColorParams = {
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark;
-  overrides: { light?: string; dark?: string };
+  overrides?: { light?: string; dark?: string };
 };
 
 export function useThemeColor(params: ThemeColorParams[]) {
@@ -23,7 +23,7 @@ export function useThemeColor(params: ThemeColorParams[]) {
   let result = [];
 
   for (const param of params) {
-    const colorFromProps = param.overrides[theme];
+    const colorFromProps = param.overrides && param.overrides[theme];
 
     if (colorFromProps) {
       result.push(colorFromProps);

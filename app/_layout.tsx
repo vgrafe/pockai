@@ -6,12 +6,20 @@ import {
 import { useFonts } from "expo-font";
 import { Link, SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
-import { Pressable, useColorScheme } from "react-native";
+import { Pressable, Switch, View, useColorScheme } from "react-native";
 import Colors from "@/constants/Colors";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Settings, Info } from "lucide-react-native";
+import {
+  Settings,
+  Info,
+  Mic2,
+  Keyboard,
+  Volume2,
+  VolumeX,
+} from "lucide-react-native";
 import { useAsyncStore } from "@/lib/asyncStore";
+import { useThemeColor } from "@/lib/theme";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,7 +68,17 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
-  const showOnboarding = useAsyncStore((a) => a.showOnboarding);
+  const [showOnboarding, speakBack, setSpeakBack] = useAsyncStore((a) => [
+    a.showOnboarding,
+    a.speakBack,
+    a.setSpeakBack,
+  ]);
+
+  const [iconColor] = useThemeColor([
+    {
+      colorName: "text",
+    },
+  ]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -95,20 +113,32 @@ function RootLayoutNav() {
             options={({ route }) => ({
               title: route.params.name,
               headerRight: () => (
-                <Link href={`/contacts/${route.params.name}/settings`} asChild>
-                  <Pressable>
-                    {({ pressed }) => (
-                      <Info
-                        size={25}
-                        color={Colors[colorScheme ?? "light"].text}
-                        style={{
-                          marginRight: 15,
-                          opacity: pressed ? 0.5 : 1,
-                        }}
-                      />
+                <View style={{ flexDirection: "row", gap: 12 }}>
+                  <Pressable onPress={() => setSpeakBack(!speakBack)}>
+                    {speakBack ? (
+                      <Volume2 color={iconColor} />
+                    ) : (
+                      <VolumeX color={iconColor} />
                     )}
                   </Pressable>
-                </Link>
+                  <Link
+                    href={`/contacts/${route.params.name}/settings`}
+                    asChild
+                  >
+                    <Pressable>
+                      {({ pressed }) => (
+                        <Info
+                          size={25}
+                          color={Colors[colorScheme ?? "light"].text}
+                          style={{
+                            marginRight: 15,
+                            opacity: pressed ? 0.5 : 1,
+                          }}
+                        />
+                      )}
+                    </Pressable>
+                  </Link>
+                </View>
               ),
             })}
           />

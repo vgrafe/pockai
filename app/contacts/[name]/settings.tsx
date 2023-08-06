@@ -17,22 +17,21 @@ export default function Settings() {
     a.setContacts,
   ]);
 
+  const resetChat = (contact: Contact) => {
+    contact.history = [
+      {
+        role: "system",
+        content: getSystemPrompt(contact.name, contact.personality),
+      },
+    ];
+  };
+
   return (
     <ScrollView style={styles.container}>
       <ContactForm
         contact={currentContact!}
         onSave={(updatedContact, reset) => {
-          if (reset) {
-            updatedContact.history = [
-              {
-                role: "system",
-                content: getSystemPrompt(
-                  updatedContact.name,
-                  updatedContact.personality
-                ),
-              },
-            ];
-          }
+          if (reset) resetChat(updatedContact);
           updateContact(updatedContact);
           router.back();
         }}
@@ -46,6 +45,15 @@ export default function Settings() {
               contacts.filter((c) => c.name !== currentContact!.name)
             );
             router.replace("/");
+          }}
+        />
+        <Button
+          title="reset chat"
+          lightColor="#f77"
+          darkColor="#a44"
+          onPress={() => {
+            resetChat(currentContact!);
+            updateContact(currentContact!);
           }}
         />
       </ContactForm>
