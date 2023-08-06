@@ -16,10 +16,9 @@ import { playSound, useRecorder } from "@/lib/audio";
 import { Bubble } from "@/components/Bubble";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSecureStore } from "@/lib/secureStore";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { Text } from "@/components/Text";
 import { useCurrentContact } from "@/lib/useCurrentContact";
-import { getSystemPrompt } from "@/lib/defaultPersona";
 import { Button } from "@/components/Button";
 import { styles } from "@/lib/styles";
 
@@ -121,7 +120,7 @@ const Recorder = () => {
     },
   });
 
-  const actualChatLines = currentContact!.history.filter(
+  const actualChatLines = currentContact?.history.filter(
     (a) => a.role !== "system"
   );
 
@@ -129,7 +128,7 @@ const Recorder = () => {
 
   useEffect(() => {
     scrollRef.current?.scrollToEnd({ animated: true });
-  }, [actualChatLines.length, actualChatLines.at(-1)?.content]);
+  }, [actualChatLines?.length, actualChatLines?.at(-1)?.content]);
 
   const router = useRouter();
 
@@ -148,7 +147,7 @@ const Recorder = () => {
         </>
       ) : (
         <>
-          {actualChatLines.length === 0 && (
+          {actualChatLines?.length === 0 && (
             <Text
               style={{
                 marginTop: "30%",
@@ -162,7 +161,7 @@ const Recorder = () => {
             </Text>
           )}
           <ScrollView ref={scrollRef} style={{ width: "95%" }}>
-            {actualChatLines.map((line, i) => (
+            {actualChatLines?.map((line, i) => (
               <Bubble
                 key={i}
                 alignSelf={line.role === "user" ? "flex-end" : "flex-start"}
