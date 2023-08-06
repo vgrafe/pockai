@@ -162,7 +162,14 @@ const Recorder = () => {
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={80}
-      style={[styles.container, { margin: 12, alignItems: "center" }]}
+      style={[
+        styles.container,
+        {
+          margin: 12,
+          alignItems: "center",
+          marginHorizontal: "auto",
+        },
+      ]}
       behavior="padding"
     >
       {!openAi ? (
