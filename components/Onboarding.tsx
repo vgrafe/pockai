@@ -4,6 +4,7 @@ import { Text } from "./Text";
 export const Onboarding = () => (
   <SafeAreaView
     style={{
+      flex: 1,
       gap: 12,
       flexDirection: "column",
       alignItems: "center",

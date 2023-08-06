@@ -33,18 +33,14 @@ const Contacts = () => {
 
   if (showOnboarding)
     return (
-      <View style={{ gap: 12, margin: 12, marginTop: 100, height: "100%" }}>
+      <View style={{ gap: 12, margin: 12, flex: 1, marginBottom: 100 }}>
         <Onboarding />
-        <Button
-          style={{ alignSelf: "center" }}
-          title="close"
-          onPress={() => setShowOnboarding(false)}
-        />
+        <Button title="close" onPress={() => setShowOnboarding(false)} />
       </View>
     );
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       {contacts.map((contact) => (
         <List.Item key={contact.name}>
           <Link href={`/contacts/${contact.name}/chat`}>
@@ -52,17 +48,8 @@ const Contacts = () => {
           </Link>
         </List.Item>
       ))}
-      {showIntroText && (
-        <View style={styles.centeredContent}>
-          <Text>
-            You have no contacts, so we added {contacts[0].name} for you. Go
-            ahead and click on it to start chatting!
-          </Text>
-        </View>
-      )}
       <View
         style={{
-          alignSelf: "center",
           marginTop: 32,
         }}
       >
@@ -70,6 +57,14 @@ const Contacts = () => {
           <Button title="Add Contact" />
         </Link>
       </View>
+      {showIntroText && (
+        <View style={[styles.centeredContent, { flex: 1, margin: 36 }]}>
+          <Text style={{ textAlign: "center" }}>
+            You have no contacts, so we added {contacts[0].name} for you. Go
+            ahead and click on it to start chatting!
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

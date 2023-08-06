@@ -10,6 +10,5 @@ export const styles = StyleSheet.create({
   centeredContent: {
     alignItems: "center",
     justifyContent: "center",
-    height: "100%",
   },
 });

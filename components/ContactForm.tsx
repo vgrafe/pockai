@@ -75,11 +75,7 @@ export default function ContactForm(props: ContactFormProps) {
             />
           </>
         )}
-        <Button
-          title="Save"
-          style={{ alignSelf: "center" }}
-          onPress={() => props.onSave(contact)}
-        />
+        <Button title="Save" onPress={() => props.onSave(contact)} />
       </View>
     </ScrollView>
   );

@@ -34,6 +34,7 @@ const baseStyle = StyleSheet.create({
     borderColor: "#8888",
     cursor: "pointer",
     elevation: 2,
+    alignSelf: "center",
   },
   text: {
     fontWeight: "400",
