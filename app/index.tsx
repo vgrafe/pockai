@@ -41,13 +41,15 @@ const Contacts = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      {contacts.map((contact) => (
-        <List.Item key={contact.name}>
-          <Link href={`/contacts/${contact.name}/chat`}>
-            <Text>{contact.name}</Text>
-          </Link>
-        </List.Item>
-      ))}
+      {contacts
+        .filter((contact) => contact.name)
+        .map((contact) => (
+          <List.Item key={contact.name}>
+            <Link href={`/contacts/${contact.name}/chat`}>
+              <Text>{contact.name}</Text>
+            </Link>
+          </List.Item>
+        ))}
       <View
         style={{
           marginTop: 32,
