@@ -143,7 +143,12 @@ const Recorder = () => {
         <>
           {actualChatLines.length === 0 && (
             <Text
-              style={{ marginTop: "30%", fontSize: 24, textAlign: "center" }}
+              style={{
+                marginTop: "30%",
+                marginHorizontal: "5%",
+                fontSize: 24,
+                textAlign: "center",
+              }}
             >
               press and hold the button, talk to {currentContact?.name}, then
               release
