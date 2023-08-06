@@ -25,7 +25,10 @@ export default function NewContact() {
           savedContact.history = [
             {
               role: "system",
-              content: getSystemPrompt(savedContact?.personality || ""),
+              content: getSystemPrompt(
+                savedContact.name,
+                savedContact.personality
+              ),
             },
           ];
           setContacts([...contacts, savedContact]);

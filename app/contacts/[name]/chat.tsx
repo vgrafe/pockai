@@ -1,4 +1,10 @@
-import { ScrollView, View, TouchableOpacity, SafeAreaView } from "react-native";
+import {
+  ScrollView,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  Platform,
+} from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { callWhisperWithAudioUrl } from "@/lib/voice-to-text";
 import { callChatGPTWithConvo } from "@/lib/completion";
@@ -155,7 +161,7 @@ const Recorder = () => {
               release
             </Text>
           )}
-          <ScrollView ref={scrollRef}>
+          <ScrollView ref={scrollRef} style={{ width: "95%" }}>
             {actualChatLines.map((line, i) => (
               <Bubble
                 key={i}
@@ -182,13 +188,15 @@ const Recorder = () => {
               </Bubble>
             )}
           </ScrollView>
-          <Text
-            style={{
-              marginVertical: 32,
-            }}
-          >
-            {error}
-          </Text>
+          {error && (
+            <Text
+              style={{
+                marginVertical: 32,
+              }}
+            >
+              {error}
+            </Text>
+          )}
           <TouchableOpacity
             style={{
               width: 100,
@@ -199,6 +207,7 @@ const Recorder = () => {
               borderRadius: 50,
               justifyContent: "center",
               alignItems: "center",
+              marginBottom: Platform.OS === "web" ? 24 : undefined,
             }}
             disabled={status !== "ready" || !openAi}
             onPressIn={() => {

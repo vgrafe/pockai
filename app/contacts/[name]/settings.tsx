@@ -1,6 +1,7 @@
 import { Button } from "@/components/Button";
 import ContactForm from "@/components/ContactForm";
 import { useAsyncStore } from "@/lib/asyncStore";
+import { getSystemPrompt } from "@/lib/defaultPersona";
 import { styles } from "@/lib/styles";
 import { useCurrentContact } from "@/lib/useCurrentContact";
 import { useRouter } from "expo-router";
@@ -20,7 +21,18 @@ export default function Settings() {
     <ScrollView style={styles.container}>
       <ContactForm
         contact={currentContact!}
-        onSave={(updatedContact) => {
+        onSave={(updatedContact, reset) => {
+          if (reset) {
+            updatedContact.history = [
+              {
+                role: "system",
+                content: getSystemPrompt(
+                  updatedContact.name,
+                  updatedContact.personality
+                ),
+              },
+            ];
+          }
           updateContact(updatedContact);
           router.back();
         }}

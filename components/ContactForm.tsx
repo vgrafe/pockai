@@ -9,7 +9,7 @@ import { Hr } from "./Hr";
 
 type ContactFormProps = {
   contact: Contact;
-  onSave: (contact: Contact) => void;
+  onSave: (contact: Contact, reset: boolean) => void;
   children?: React.ReactNode;
 };
 
@@ -37,6 +37,20 @@ export default function ContactForm(props: ContactFormProps) {
 
   return (
     <View style={{ gap: 12, margin: 12 }}>
+      {contact?.history.length > 1 && (
+        <View
+          style={{
+            backgroundColor: "#fdd",
+            padding: 8,
+            borderRadius: 8,
+          }}
+        >
+          <Text>
+            You have an ongoing chat with this contact. Changing their name or
+            personality will reset the chat.
+          </Text>
+        </View>
+      )}
       <Text style={{ marginLeft: 4, fontWeight: "500" }}>name</Text>
       <TextInput
         value={contact.name}
@@ -50,12 +64,6 @@ export default function ContactForm(props: ContactFormProps) {
         want to talk to. It is enhanced by the app to make the responses more
         human and less verbose.
       </Text>
-      {contact?.history.length > 1 && (
-        <Text>
-          You have an ongoing chat with this contact. Changing the personality
-          will reset the chat.
-        </Text>
-      )}
       <TextInput
         value={contact?.personality}
         onChangeText={(personality) => {
@@ -87,7 +95,11 @@ export default function ContactForm(props: ContactFormProps) {
         darkColor="#4a4"
         onPress={() => {
           if (contact.name.length && contact.personality.length)
-            props.onSave(contact);
+            props.onSave(
+              contact,
+              contact.name !== props.contact.name ||
+                contact.personality !== props.contact.personality
+            );
         }}
       />
       {props.children}
