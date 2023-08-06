@@ -33,7 +33,7 @@ const Contacts = () => {
 
   if (showOnboarding)
     return (
-      <View style={{ gap: 12, margin: 12 }}>
+      <View style={{ gap: 12, margin: 12, marginTop: 100, height: "100%" }}>
         <Onboarding />
         <Button
           style={{ alignSelf: "center" }}

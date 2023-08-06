@@ -1,13 +1,13 @@
-import { View } from "react-native";
+import { SafeAreaView } from "react-native";
 import { Text } from "./Text";
 
 export const Onboarding = () => (
-  <View
+  <SafeAreaView
     style={{
       gap: 12,
-      flex: 1,
       flexDirection: "column",
       alignItems: "center",
+      justifyContent: "center",
       maxWidth: 500,
       marginHorizontal: "auto",
     }}
@@ -38,5 +38,5 @@ export const Onboarding = () => (
       default contact/personality, or create your own contacts, define their
       personality then chat with them!
     </Text>
-  </View>
+  </SafeAreaView>
 );
