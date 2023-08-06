@@ -77,7 +77,7 @@ export default function ContactForm(props: ContactFormProps) {
           setContact({ ...contact!, personality });
         }}
         multiline
-        numberOfLines={12}
+        numberOfLines={4}
         style={{ padding: 8, borderRadius: 8, fontSize: 16 }}
       />
       {voices?.voices.length && (

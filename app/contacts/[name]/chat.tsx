@@ -165,7 +165,6 @@ const Recorder = () => {
       style={[
         styles.container,
         {
-          margin: 12,
           alignItems: "center",
           marginHorizontal: "auto",
         },
@@ -198,7 +197,7 @@ const Recorder = () => {
               release the button.
             </Text>
           )}
-          <ScrollView ref={scrollRef} style={{ flex: 1 }}>
+          <ScrollView ref={scrollRef} style={{ flex: 1, marginHorizontal: 8 }}>
             {actualChatLines?.map((line, i) => (
               <Bubble
                 key={i}
@@ -224,7 +223,7 @@ const Recorder = () => {
             </Text>
           )}
           {useMicrophone ? (
-            <View style={{ position: "relative", width: "80%" }}>
+            <View style={{ position: "relative", width: "80%", marginTop: 12 }}>
               <Pressable
                 hitSlop={10}
                 style={{ position: "absolute", bottom: "50%", left: 0 }}
@@ -272,6 +271,7 @@ const Recorder = () => {
                 alignSelf: "stretch",
                 alignItems: "center",
                 marginBottom: 32,
+                marginHorizontal: 12,
               }}
             >
               <Pressable hitSlop={10} onPress={() => setUseMicrophone(true)}>
