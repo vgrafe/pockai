@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Pressable,
+  useColorScheme,
 } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { callWhisperWithAudioUrl } from "@/lib/voice-to-text";
@@ -41,7 +42,8 @@ const Recorder = () => {
 
   const [keyboardText, setKeyboardText] = useState("");
 
-  const [useMicrophone, setUseMicrophone] = useAsyncStore((a) => [
+  const [speakBack, useMicrophone, setUseMicrophone] = useAsyncStore((a) => [
+    a.speakBack,
     a.useMicrophone,
     a.setUseMicrophone,
   ]);
@@ -58,9 +60,12 @@ const Recorder = () => {
     "ready" | "understanding" | "answering" | "vocalizing" | "speaking"
   >("ready");
 
-  const [iconColor] = useThemeColor([
+  const [textColor, placeholderTextColor] = useThemeColor([
     {
       colorName: "text",
+    },
+    {
+      colorName: "placeholderText",
     },
   ]);
 
@@ -218,7 +223,7 @@ const Recorder = () => {
                 style={{ position: "absolute", bottom: "50%", left: 0 }}
                 onPress={() => setUseMicrophone(false)}
               >
-                <KeyboardIcon color={iconColor} />
+                <KeyboardIcon color={textColor} />
               </Pressable>
               <TouchableOpacity
                 style={{
@@ -263,11 +268,14 @@ const Recorder = () => {
               }}
             >
               <Pressable hitSlop={10} onPress={() => setUseMicrophone(true)}>
-                <Mic2 color={iconColor} />
+                <Mic2 color={textColor} />
               </Pressable>
               <TextInput
                 placeholder="type something here"
-                style={{ flex: 1 }}
+                style={{
+                  flex: 1,
+                  color: keyboardText.length ? textColor : placeholderTextColor,
+                }}
                 value={keyboardText}
                 onChangeText={setKeyboardText}
                 onSubmitEditing={() => {
@@ -283,7 +291,7 @@ const Recorder = () => {
                   setKeyboardText("");
                 }}
               >
-                <Send color={iconColor} />
+                <Send color={textColor} />
               </Pressable>
             </View>
           )}
