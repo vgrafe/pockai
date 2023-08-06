@@ -9,6 +9,7 @@ type Contact = {
   personality: string;
   voiceId?: string;
   voiceName?: string;
+  history: ChatCompletionRequestMessage[];
 };
 
 type Voice = { name: string; voice_id: string };
