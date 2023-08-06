@@ -13,7 +13,7 @@ export default {
   },
   dark: {
     text: "#fff",
-    danger: "#a77",
+    danger: "#944",
     placeholderText: "#fff8",
     background: "#111",
     tint: tintColorDark,

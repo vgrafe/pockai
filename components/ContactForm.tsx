@@ -6,6 +6,7 @@ import { useState } from "react";
 import { View } from "react-native";
 import { VoiceSelector } from "./VoiceSelector";
 import { Hr } from "./Hr";
+import { useThemeColor } from "@/lib/theme";
 
 type ContactFormProps = {
   contact: Contact;
@@ -19,6 +20,12 @@ export default function ContactForm(props: ContactFormProps) {
   const { data: voices } = useElevenLabsVoices();
 
   const [selectingVoice, setSelectingVoice] = useState(false);
+
+  const [dangerColor] = useThemeColor([
+    {
+      colorName: "danger",
+    },
+  ]);
 
   if (selectingVoice)
     return (
@@ -40,7 +47,7 @@ export default function ContactForm(props: ContactFormProps) {
       {contact?.history.length > 1 && (
         <View
           style={{
-            backgroundColor: "#fdd",
+            backgroundColor: dangerColor,
             padding: 8,
             borderRadius: 8,
           }}
