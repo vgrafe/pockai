@@ -167,17 +167,6 @@ const Recorder = () => {
                 key={i}
                 alignSelf={line.role === "user" ? "flex-end" : "flex-start"}
                 backgroundColor={line.role === "user" ? "blue" : "gray"}
-                onPress={async () => {
-                  if (
-                    audioBlob &&
-                    i == actualChatLines.length - 1 &&
-                    status === "ready"
-                  ) {
-                    setStatus("speaking");
-                    await playSound(audioBlob);
-                    setStatus("ready");
-                  }
-                }}
               >
                 {line.content}
               </Bubble>
