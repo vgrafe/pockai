@@ -35,9 +35,8 @@ export const VoiceSelector = (props: VoiceSelectorProps) => {
       ) : (
         <FlatList
           data={voices?.voices}
-          renderItem={({ item: voice }) => (
+          renderItem={({ item: voice }: { item: Voice }) => (
             <List.Item
-              key={voice.name}
               onPress={() => {
                 props.onSelect(voice);
               }}
@@ -48,7 +47,7 @@ export const VoiceSelector = (props: VoiceSelectorProps) => {
               </Text>
             </List.Item>
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(voice) => voice.voice_id}
         />
       )}
     </View>

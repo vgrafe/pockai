@@ -8,7 +8,7 @@ const Settings = () => {
   return (
     <ScrollView
       automaticallyAdjustKeyboardInsets
-      style={[styles.container, { padding: 24 }]}
+      style={[styles.container, { padding: 12 }]}
     >
       <ApiKeysMenu />
       <Text>

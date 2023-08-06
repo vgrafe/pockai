@@ -119,20 +119,6 @@ function RootLayoutNav() {
               title: `${route.params.name} - settings`,
             })}
           />
-          <Stack.Screen
-            name="contacts/[name]/voice"
-            // @ts-expect-error
-            options={({ route }) => ({
-              title: `${route.params.name} - voice`,
-            })}
-          />
-          <Stack.Screen
-            name="contacts/[name]/personality"
-            // @ts-expect-error
-            options={({ route }) => ({
-              title: `${route.params.name} - personality`,
-            })}
-          />
           <Stack.Screen name="settings" options={{ presentation: "modal" }} />
           <Stack.Screen
             name="contacts/new"
