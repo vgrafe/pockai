@@ -19,7 +19,7 @@
 export const callChatGPTWithConvo = async (
   messages: ChatCompletionRequestMessage[],
   openAiKey: string
-) => {
+): Promise<string> => {
   const req = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -33,5 +33,7 @@ export const callChatGPTWithConvo = async (
     }),
   });
 
-  return req.json();
+  if (req.ok) return (await req.json()).choices[0].message.content;
+
+  throw (await req.json()).error.code;
 };

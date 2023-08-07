@@ -38,8 +38,7 @@ export default function Settings() {
       >
         <Button
           title="delete contact"
-          lightColor="#f77"
-          darkColor="#a44"
+          variant="danger"
           onPress={() => {
             setContacts(
               contacts.filter((c) => c.name !== currentContact!.name)
@@ -49,8 +48,7 @@ export default function Settings() {
         />
         <Button
           title="reset chat"
-          lightColor="#f77"
-          darkColor="#a44"
+          variant="danger"
           onPress={() => {
             resetChat(currentContact!);
             updateContact(currentContact!);

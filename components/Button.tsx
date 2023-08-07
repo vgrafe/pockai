@@ -7,18 +7,24 @@ import {
 import { ThemeProps, useThemeColor } from "../lib/theme";
 import { Text } from "./Text";
 
-export type ButtonProps = ThemeProps &
-  TouchableOpacityProps & { title: string; style?: ViewProps["style"] };
+export type ButtonProps = ThemeProps & {
+  variant?: Variant;
+} & TouchableOpacityProps & { title: string; style?: ViewProps["style"] };
 
 export function Button(props: ButtonProps) {
   const { lightColor, darkColor, title, style, ...otherProps } = props;
 
-  const [backgroundColor] = useThemeColor([
+  const [baseBackgroundColor, variantBackgroundColor] = useThemeColor([
     {
       colorName: "background",
       overrides: { light: lightColor, dark: darkColor },
     },
+    { colorName: props.variant || "info" },
   ]);
+
+  const backgroundColor = props.variant
+    ? variantBackgroundColor
+    : baseBackgroundColor;
 
   return (
     <TouchableOpacity

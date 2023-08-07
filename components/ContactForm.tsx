@@ -21,9 +21,9 @@ export default function ContactForm(props: ContactFormProps) {
 
   const [selectingVoice, setSelectingVoice] = useState(false);
 
-  const [dangerColor] = useThemeColor([
+  const [warningColor] = useThemeColor([
     {
-      colorName: "danger",
+      colorName: "warning",
     },
   ]);
 
@@ -47,7 +47,7 @@ export default function ContactForm(props: ContactFormProps) {
       {contact?.history.length > 1 && (
         <View
           style={{
-            backgroundColor: dangerColor,
+            backgroundColor: warningColor,
             padding: 8,
             borderRadius: 8,
           }}

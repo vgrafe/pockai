@@ -84,8 +84,16 @@ const Recorder = () => {
 
     setStatus("answering");
 
-    const gptAnswer = await callChatGPTWithConvo(newChatLines, openAi);
-    const response = gptAnswer.choices[0].message.content;
+    let response;
+    try {
+      response = await callChatGPTWithConvo(newChatLines, openAi);
+    } catch (e: any) {
+      setError(
+        "An error happened when calling OpenAI. Please verify your API key and try again."
+      );
+      setStatus("ready");
+      return;
+    }
 
     // const gptCost = Math.round(totalCost);
 
@@ -110,7 +118,9 @@ const Recorder = () => {
           setStatus("speaking");
           await playSound(_audioBlob);
         } catch (e: any) {
-          setError(e.message);
+          setError(
+            "An error happened when calling Elevenlabs; defaulting to your system speech synthesis instead. Please verify your API key and try again."
+          );
           await sayWithSystemSpeech(response);
         }
       } else await sayWithSystemSpeech(response);
@@ -197,7 +207,7 @@ const Recorder = () => {
               release the button.
             </Text>
           )}
-          <ScrollView ref={scrollRef} style={{ flex: 1, marginHorizontal: 8 }}>
+          <ScrollView ref={scrollRef} style={{ flex: 1, width: "100%" }}>
             {actualChatLines?.map((line, i) => (
               <Bubble
                 key={i}
@@ -215,6 +225,7 @@ const Recorder = () => {
           </ScrollView>
           {error && (
             <Text
+              variant="danger"
               style={{
                 marginVertical: 8,
               }}

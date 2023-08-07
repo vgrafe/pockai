@@ -15,3 +15,5 @@ type Contact = {
 };
 
 type Voice = { name: string; voice_id: string };
+
+type Variant = "danger" | "success" | "warning" | "info";
