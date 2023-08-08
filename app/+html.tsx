@@ -1,4 +1,9 @@
 import { ScrollViewStyleReset } from "expo-router/html";
+import { inject } from "@vercel/analytics";
+
+inject({
+  mode: __DEV__ ? "development" : "production",
+});
 
 // This file is web-only and used to configure the root HTML for every
 // web page during static rendering.
